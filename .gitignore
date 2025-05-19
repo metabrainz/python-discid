@@ -1,4 +1,5 @@
 *.pyc
+discid.egg-info/
 dist/
 build/
 MANIFEST
