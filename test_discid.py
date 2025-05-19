@@ -2,8 +2,8 @@
 # Copyright (C) 2013  Johannes Dewender
 # This test is free. You can redistribute and/or modify it at will.
 
-import sys
 import math
+import os
 import unittest
 
 import discid
@@ -108,6 +108,10 @@ class TestModule(unittest.TestCase):
         self.assertEqual(disc.cddb_query_string, cddb_query_string)
 
 
+@unittest.skipUnless(
+    os.environ.get('PYTHON_DISCID_TEST_DEVICE'),
+    "tests require physical CD drive with inserted disc",
+)
 class TestDisc(unittest.TestCase):
     """Test reading the disc currently in the drive
     """
