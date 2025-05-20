@@ -1,25 +1,16 @@
 version := 1.2.0
 
 build:
-	python setup.py build
+	python -m build .
 
-sdist:
-	python setup.py sdist
-
-upload: sdist
+upload: build
 	twine3 upload -s dist/discid-$(version).tar.gz
 
 check:
-	python setup.py test -vv
-
-check2:
-	python2 setup.py test -vv
+	pytest --verbose
 
 disccheck:
-	python setup.py test -vv --tests test_discid.TestDisc
-
-disccheck2:
-	python2 setup.py test -vv --tests test_discid.TestDisc
+	PYTHON_DISCID_TEST_DEVICE=1 pytest --verbose
 
 doc:
 	cd doc && make dirhtml
@@ -27,8 +18,8 @@ doc:
 version:
 	sed -i -e 's/\(__version__\s=\s"\)[0-9.]\+[0-9a-z.-]*/\1$(version)/' \
 		discid/__init__.py
-	sed -i -e 's/\(version="\)[0-9.]\+[0-9a-z.-]*/\1$(version)/' \
-		setup.py
+	sed -i -e 's/\(version = "\)[0-9.]\+[0-9a-z.-]*/\1$(version)/' \
+		pyproject.toml
 
 clean:
 	rm -f *.pyc discid/*.pyc

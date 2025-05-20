@@ -45,15 +45,14 @@ else:
     download_url = "%s/v%s.%%s" % (download_base, release)
 
 extlinks = {
-  'source_download': (download_url, ''),
-  'issue': ('https://github.com/metabrainz/python-discid/issues/%s', '#'),
-  'musicbrainz': ('http://musicbrainz.org/doc/%s', ''),
+  'source_download': (download_url, '%s'),
+  'issue': ('https://github.com/metabrainz/python-discid/issues/%s', '#%s'),
+  'musicbrainz': ('http://musicbrainz.org/doc/%s', '%s'),
 }
 
 # there seems to be no way to prefer latest python documentation
 intersphinx_mapping = {
   'python': ('http://python.readthedocs.org/en/latest/', None),
-  'python2': ('http://python.readthedocs.org/en/v2.7.2/', None),
   'musicbrainzngs':
     ('http://python-musicbrainzngs.readthedocs.org/en/latest/', None),
 }
