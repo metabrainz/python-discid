@@ -2,7 +2,7 @@ Libdiscid Python bindings
 -------------------------
 
 Python-discid implements Python bindings for MusicBrainz Libdiscid. This
-module works with Python 2 >= 2.6, or Python 3 >= 3.1.
+module supports Python 3 >= 3.9.
 Libdiscid >= 0.2.2 is needed.
 
 Libdiscid's main purpose is the calculation of an identifier of audio
@@ -32,8 +32,7 @@ Usage
     import discid
 
     disc = discid.read()  # use default device
-    print "id: %s" % disc.id  # Python 2
-    print("id: %s" % disc.id) # Python 3
+    print("id: %s" % disc.id)
 
 See also the examples.py.
 
