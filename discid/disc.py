@@ -169,7 +169,14 @@ class Disc(object):
         self._requested_features = ["read"]
 
         offsets = [disc_sectors] + track_offsets
-        c_offsets = (c_int * len(offsets))(*tuple(offsets))
+        # libdiscid always expects an array of 100 integers, no matter the track count.
+        c_offsets = (c_int * 100)()
+        c_offsets[0] = offsets[0]
+        try:
+            for i, offset in enumerate(offsets[1:]):
+                c_offsets[i + first] = offset
+        except IndexError:
+            raise TOCError("Too many tracks") from None
         result = _LIB.discid_put(self._handle, first, last, c_offsets) == 1
         self._success = result
         if not self._success:

@@ -19,7 +19,17 @@ test_discs = [
                         149160, 165115, 177710, 203325, 215555, 235590],
             "id": "TqvKjMu7dMliSfmVEBtrL7sBSno-",
             "freedb": "b60d770f"
-        }
+        },
+        {
+            "name": "Lunar - There Is No 1, first track is 2",
+            "first": 2,
+            "last" : 11,
+            "sectors": 225781,
+            "offsets": [150, 11512, 34143, 50747, 63640, 98491,
+                        123534, 174410, 195438, 201127],
+            "id": "6RDuz0d7.M5SVMLe1z4DP0yaEC8-",
+            "freedb": "840bc20b"
+        },
     ]
 
 class TestModulePrivate(unittest.TestCase):
@@ -80,32 +90,34 @@ class TestModule(unittest.TestCase):
                           discid.put, 1, 2, 1000, [150, 500, 750])
         # total sectors / offset mismatch
         self.assertRaises(discid.TOCError, discid.put, 1, 2, 150, [150, 500])
+        # too many tracks
+        self.assertRaises(discid.TOCError, discid.put, 98, 100, 2000, [150, 500, 750])
 
     def test_put_success(self):
-        test_disc = test_discs[0]
-        disc = discid.put(test_disc["first"], test_disc["last"],
-                          test_disc["sectors"], test_disc["offsets"])
-        self.assertEqual(disc.id, test_disc["id"])
-        self.assertEqual(disc.freedb_id, test_disc["freedb"])
-        self.assertEqual(disc.first_track_num, test_disc["first"])
-        self.assertEqual(disc.last_track_num, test_disc["last"])
-        self.assertEqual(disc.sectors, test_disc["sectors"])
-        track_offsets = [track.offset for track in disc.tracks]
-        self.assertEqual(track_offsets, test_disc["offsets"])
-        self.assertEqual(disc.sectors,
-                         disc.tracks[-1].offset + disc.tracks[-1].sectors)
-        self.assertEqual(disc.seconds, math.floor((disc.sectors / 75.0) + 0.5))
-        self.assertEqual(type(disc.seconds), int)
-        for track in disc.tracks:
-            self.assertEqual(track.seconds,
-                             math.floor((track.sectors / 75.0) + 0.5))
-            self.assertEqual(type(track.seconds), int)
-        toc_string = ["1", disc.last_track_num, disc.sectors] + track_offsets
-        toc_string = " ".join(map(str, toc_string))
-        self.assertEqual(disc.toc_string, toc_string)
-        cddb_query_string = [disc.freedb_id, disc.last_track_num] + track_offsets + [disc.seconds]
-        cddb_query_string = " ".join(map(str, cddb_query_string))
-        self.assertEqual(disc.cddb_query_string, cddb_query_string)
+        for test_disc in test_discs:
+            disc = discid.put(test_disc["first"], test_disc["last"],
+                            test_disc["sectors"], test_disc["offsets"])
+            self.assertEqual(disc.id, test_disc["id"])
+            self.assertEqual(disc.freedb_id, test_disc["freedb"])
+            self.assertEqual(disc.first_track_num, test_disc["first"])
+            self.assertEqual(disc.last_track_num, test_disc["last"])
+            self.assertEqual(disc.sectors, test_disc["sectors"])
+            track_offsets = [track.offset for track in disc.tracks]
+            self.assertEqual(track_offsets, test_disc["offsets"])
+            self.assertEqual(disc.sectors,
+                            disc.tracks[-1].offset + disc.tracks[-1].sectors)
+            self.assertEqual(disc.seconds, math.floor((disc.sectors / 75.0) + 0.5))
+            self.assertEqual(type(disc.seconds), int)
+            for track in disc.tracks:
+                self.assertEqual(track.seconds,
+                                math.floor((track.sectors / 75.0) + 0.5))
+                self.assertEqual(type(track.seconds), int)
+            toc_string = [test_disc["first"], disc.last_track_num, disc.sectors] + track_offsets
+            toc_string = " ".join(map(str, toc_string))
+            self.assertEqual(disc.toc_string, toc_string)
+            cddb_query_string = [disc.freedb_id, disc.last_track_num] + track_offsets + [disc.seconds]
+            cddb_query_string = " ".join(map(str, cddb_query_string))
+            self.assertEqual(disc.cddb_query_string, cddb_query_string)
 
 
 @unittest.skipUnless(
