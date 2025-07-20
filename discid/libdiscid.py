@@ -100,7 +100,7 @@ def _open_library(lib_name):
     except OSError as exc:
         if lib_name not in str(exc):
             # replace uninformative Error on Windows
-            raise OSError("could not find libdiscid: %s" % lib_name)
+            raise OSError("could not find libdiscid: %s" % lib_name) from exc
         else:
             raise
 
