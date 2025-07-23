@@ -19,15 +19,9 @@ you might find **python-discid** in a repository used by your package manager.
 These packages are known:
 
  * Arch Linux:
-   AUR (
-   `Arch Python 2 <https://aur.archlinux.org/packages/python2-discid/>`_,
-   `Arch Python 3 <https://aur.archlinux.org/packages/python-discid/>`_
-   )
+   `python-discid <https://archlinux.org/packages/extra/any/python-discid/>`_
  * openSUSE:
-   software.opensuse.org (
-   `SuSE Python 2 <http://software.opensuse.org/package/python-discid>`_,
-   `SuSE Python 3 <http://software.opensuse.org/package/python3-discid>`_
-   )
+   `python-discid <http://software.opensuse.org/package/python-discid>`_
  * Ubuntu:
    PPA (
    `musicbrainz-stable <https://launchpad.net/~musicbrainz-developers/+archive/stable>`_
