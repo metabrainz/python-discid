@@ -25,6 +25,6 @@ classifiers = [
 
 [project.urls]
 Documentation = "https://python-discid.readthedocs.org/"
-Repository = "https://github.com/JonnyJD/python-discid"
-Issues = "https://github.com/JonnyJD/python-discid/issues"
-Changelog = "https://github.com/JonnyJD/python-discid/blob/master/CHANGES.rst"
+Repository = "https://github.com/metabrainz/python-discid"
+Issues = "https://github.com/metabrainz/python-discid/issues"
+Changelog = "https://github.com/metabrainz/python-discid/blob/master/CHANGES.rst"
