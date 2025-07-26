@@ -29,3 +29,6 @@ Documentation = "https://python-discid.readthedocs.org/"
 Repository = "https://github.com/metabrainz/python-discid"
 Issues = "https://github.com/metabrainz/python-discid/issues"
 Changelog = "https://github.com/metabrainz/python-discid/blob/master/CHANGES.rst"
+
+[dependency-groups]
+test = ["pytest"]
