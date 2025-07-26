@@ -20,6 +20,8 @@ These packages are known:
 
  * Arch Linux:
    `python-discid <https://archlinux.org/packages/extra/any/python-discid/>`_
+ * Fedora:
+   `python3-discid <https://packages.fedoraproject.org/pkgs/python3-discid/python3-discid/>`_
  * openSUSE:
    `python-discid <http://software.opensuse.org/package/python-discid>`_
  * Ubuntu:
