@@ -96,8 +96,7 @@ class Track(object):
         """The International Standard Recording Code
 
         This will be `None` when the `"isrc"` feature was not requested
-        or not supported, otherwise this is a :obj:`unicode` or
-        :obj:`str <python:str>` object.
+        or not supported, otherwise this is a :obj:`str <python:str>` object.
         """
         return self._get_track_isrc()
 

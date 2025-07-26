@@ -36,8 +36,7 @@ def read(device=None, features=[]):
     """Reads the TOC from the device given as string
     and returns a :class:`Disc` object.
 
-    That string can be either of:
-    :obj:`str <python:str>`, :obj:`unicode` or :obj:`bytes`.
+    That string can be either of :obj:`str <python:str>` or :obj:`bytes`.
     However, it should in no case contain non-ASCII characters.
     If no device is given, a default, also given by :func:`get_default_device`
     is used.
@@ -276,14 +275,14 @@ class Disc(object):
     @property
     def id(self):
         """This is the MusicBrainz :musicbrainz:`Disc ID`,
-        a :obj:`unicode` or :obj:`str <python:str>` object.
+        a :obj:`str <python:str>` object.
         """
         return self._get_id()
 
     @property
     def freedb_id(self):
         """This is the :musicbrainz:`FreeDB` Disc ID (without category),
-        a :obj:`unicode` or :obj:`str <python:str>` object.
+        a :obj:`str <python:str>` object.
         """
         return self._get_freedb_id()
 
@@ -293,7 +292,7 @@ class Disc(object):
 
         With this url you can submit the current TOC
         as a new MusicBrainz :musicbrainz:`Disc ID`.
-        This is a :obj:`unicode` or :obj:`str <python:str>` object.
+        This is a :obj:`str <python:str>` object.
         """
         url = self._get_submission_url()
         if url is None:
@@ -309,7 +308,7 @@ class Disc(object):
         """The TOC suitable as value of the `toc parameter`
         when accessing the MusicBrainz Web Service.
 
-        This is a :obj:`unicode` or :obj:`str <python:str>` object
+        This is a :obj:`str <python:str>` object
         and enables fuzzy searching when the actual Disc ID is not found.
 
         Note that this is the unencoded value, which still contains spaces.
@@ -360,7 +359,7 @@ class Disc(object):
 
         It is set after the `"mcn"` feature was requested on a read
         and supported by the platform or :obj:`None`.
-        If set, this is a :obj:`unicode` or :obj:`str <python:str>` object.
+        If set, this is a :obj:`str <python:str>` object.
         """
         return self._get_mcn()
 
@@ -379,7 +378,7 @@ class Disc(object):
     def cddb_query_string(self):
         """A CDDB query string suitable for querying CDDB servers.
 
-        This is a :obj:`unicode` or :obj:`str <python:str>` object
+        This is a :obj:`str <python:str>` object
         and enables generating queries to CDDB servers.
 
         .. seealso:: `CDDB Server Protocol <http://ftp.freedb.org/pub/freedb/latest/CDDBPROTO>`_
