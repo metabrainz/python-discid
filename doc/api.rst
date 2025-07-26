@@ -37,6 +37,10 @@ Disc object
 
       .. versionadded:: 1.1
 
+   .. autoattribute:: cddb_query_string
+
+      .. versionadded:: 1.3
+
    .. autoattribute:: first_track_num
    .. autoattribute:: last_track_num
    .. autoattribute:: sectors

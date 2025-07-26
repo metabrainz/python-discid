@@ -9,7 +9,7 @@ Changes in 1.3.0 (2025-07-26):
    Set the environment variable ``DISCID_TESTS_REQUIRE_DISC`` to enable them
    or run ``make disccheck``.
  * Fixed :func:`put` to work with first track number greater than 1.
- * Add Disc.cddb_query_string property.
+ * Add :attr:`Disc.cddb_query_string` property.
 
 Changes in 1.2.0 (2019-02-23):
 ------------------------------
