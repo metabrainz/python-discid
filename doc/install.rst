@@ -33,8 +33,8 @@ Your package manager will also handle the *libdiscid* dependency automatically.
 PyPI
 ----
 The next-best option is to load the Package from
-`pypi <http://pypi.python.org/pypi/discid>`_
-with `pip <http://www.pip-installer.org/>`_::
+`pypi <https://pypi.org/project/discid/>`_
+with `pip <https://pip.pypa.io/>`_::
 
  pip install discid
 
