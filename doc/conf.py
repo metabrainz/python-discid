@@ -2,9 +2,6 @@ import ctypes
 import os
 import sys
 
-# to gather version information
-import discid
-
 sys.path.insert(0, os.path.abspath("."))  # for extensions
 sys.path.insert(0, os.path.abspath(".."))  # for the code
 
@@ -18,8 +15,14 @@ class Mock(object):
     def __getattr__(cls, name):
         return Mock()
 
+    def discid_get_version_string(self):
+        return ""
+
 
 ctypes.cdll.LoadLibrary = Mock()  # type: ignore
+
+# to gather version information
+import discid  # noqa: E402
 
 # -- General configuration -----------------------------------------------------
 
