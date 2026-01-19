@@ -64,7 +64,7 @@ def put(first, last, disc_sectors, track_offsets):
     `track_offsets` is a list of all audio track offsets.
 
     Depending on how you get the total sector count,
-    you might have to substract 11400 (2:32 min.) for discs with data tracks.
+    you might have to subtract 11400 (2:32 min.) for discs with data tracks.
 
     A :exc:`TOCError` exception is raised when illegal parameters
     are provided.
@@ -77,12 +77,12 @@ def put(first, last, disc_sectors, track_offsets):
 
 
 class DiscError(IOError):
-    """:func:`read` will raise this exception when an error occured.
+    """:func:`read` will raise this exception when an error occurred.
     """
     pass
 
 class TOCError(Exception):
-    """:func:`put` will raise this exception when illegal paramaters
+    """:func:`put` will raise this exception when illegal parameters
     are provided.
     """
     pass

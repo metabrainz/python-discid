@@ -30,8 +30,8 @@ def _encode(string):
     except AttributeError:
         # already byte string (Python 3)
         return string
-    # UnicodeDecodeError (Python 2) is NOT catched
-    # device names should be ascii
+    # UnicodeDecodeError (Python 2) is NOT caught
+    # device names should be ASCII
 
 def _decode(byte_string):
     """Decode byte string to (unicode) string

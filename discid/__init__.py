@@ -36,7 +36,7 @@ import discid.disc
 __version__ = "1.3.0"
 
 
-# these contants are defined here so sphinx can catch the "docstrings"
+# these constants are defined here so sphinx can catch the "docstrings"
 
 LIBDISCID_VERSION_STRING = discid.libdiscid.LIBDISCID_VERSION_STRING
 """The version string of the loaded libdiscid in the form `libdiscid x.y.z`.
