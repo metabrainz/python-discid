@@ -13,7 +13,7 @@ The basic use case is::
  print("id: %s" % disc.id)
  print("submission url:\n%s" % disc.submission_url)
 
-You can also set the device explicitely::
+You can also set the device explicitly::
 
  device = discid.get_default_device()
  disc = discid.read(device)

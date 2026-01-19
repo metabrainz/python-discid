@@ -21,7 +21,7 @@ The official API documentation can be found at `readthedocs.org`_
 
 For more information on Libdiscid see `libdiscid`_.
 
-For more information about the calculation of these disc ids see `Disc
+For more information about the calculation of these disc IDs see `Disc
 ID Calculation`_.
 
 Usage

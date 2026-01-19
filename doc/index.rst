@@ -39,7 +39,7 @@ This means that it needs to be compiled against libdiscid.
 `Python-discid` doesn't need compilation, as it uses :mod:`ctypes`.
 
 If you want to use the disc ID created by `python-discid` to query
-MusicBrainz for metatdata, then you should use `python-musicbrainzngs`_.
+MusicBrainz for metadata, then you should use `python-musicbrainzngs`_.
 See :ref:`fetching_metadata` for using `discid` and `musicbrainzngs` together.
 
 Indices and tables

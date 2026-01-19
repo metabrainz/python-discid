@@ -15,7 +15,7 @@ endif
 # Internal variables.
 ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(SPHINXOPTS) .
 
-.PHONY: help clean html dirhtml singlehtml text man changes linkcheck 
+.PHONY: help clean html dirhtml singlehtml text man changes linkcheck
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
