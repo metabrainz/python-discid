@@ -19,7 +19,7 @@ class Mock(object):
         return Mock()
 
 
-ctypes.cdll.LoadLibrary = Mock()
+ctypes.cdll.LoadLibrary = Mock()  # type: ignore
 
 # -- General configuration -----------------------------------------------------
 
