@@ -26,7 +26,7 @@ import ctypes
 from ctypes import c_void_p, c_char_p
 from ctypes.util import find_library
 
-from discid.util import _encode, _decode
+from discid.util import _decode
 
 _LIB_BASE_NAME = "discid"
 _LIB_MAJOR_VERSION = 0
@@ -155,7 +155,7 @@ def _get_features():
         features = ["read"]     # no generic platform yet
         try:
             # test for ISRC/MCN API (introduced 0.3.0)
-            _LIB.discid_get_mcn
+            _LIB.discid_get_mcn  # noqa: B018 (useless-expression)
         except AttributeError:
             pass
         else:

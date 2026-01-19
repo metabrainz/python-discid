@@ -32,7 +32,7 @@ _FEATURE_MAPPING = {"read": 1 << 0, "mcn": 1 << 1, "isrc": 1 << 2}
 
 FEATURES_IMPLEMENTED = list(_FEATURE_MAPPING.keys())
 
-def read(device=None, features=[]):
+def read(device=None, features=None):
     """Reads the TOC from the device given as string
     and returns a :class:`Disc` object.
 
@@ -123,13 +123,16 @@ class Disc(object):
         _LIB.discid_read_sparse.restype = c_int
     except AttributeError:
         pass
-    def read(self, device=None, features=[]):
+    def read(self, device=None, features=None):
         """Reads the TOC from the device given as string
 
         The user is supposed to use :func:`discid.read`.
         """
         if "read" not in FEATURES:
             raise NotImplementedError("discid_read not implemented on platform")
+
+        if features is None:
+            features = []
 
         # only use features implemented on this platform and in this module
         self._requested_features = list(set(features) & set(FEATURES)

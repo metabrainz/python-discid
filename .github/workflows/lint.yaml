@@ -1,0 +1,17 @@
+name: Linting
+on:
+  push:
+    paths: &path-list
+    - '**/*.py'
+  pull_request:
+    paths: *path-list
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Ruff lint
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: "check --output-format=github"
