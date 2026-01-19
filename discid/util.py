@@ -22,26 +22,26 @@ import math
 
 SECTORS_PER_SECOND = 75
 
-def _encode(string):
+def _encode(string: str|bytes):
     """Encode (unicode) string to byte string
     """
-    try:
+    if isinstance(string, str):
         return string.encode()
-    except AttributeError:
-        # already byte string (Python 3)
+    elif isinstance(string, bytes):
         return string
+    raise TypeError('Unexpected type, expected string or bytes')
     # UnicodeDecodeError (Python 2) is NOT caught
     # device names should be ASCII
 
-def _decode(byte_string):
+def _decode(byte_string: bytes|str):
     """Decode byte string to (unicode) string
     """
     # this test for bytes works on Python 2 and 3
-    if type(byte_string) is type(b"test"):
+    if isinstance(byte_string, bytes):
         return byte_string.decode()
-    else:
-        # probably mocked for sphinx
-        return None
+    elif isinstance(byte_string, str):
+        return byte_string
+    raise TypeError('Unexpected type, expected string or bytes')
 
 def _sectors_to_seconds(sectors):
     """Round sectors to seconds like done on MusicBrainz Server

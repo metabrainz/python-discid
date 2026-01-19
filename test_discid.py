@@ -7,6 +7,7 @@ import os
 import unittest
 
 import discid
+import discid.util
 
 test_discs = [
         {
@@ -37,13 +38,18 @@ class TestModulePrivate(unittest.TestCase):
     # lots of encoding tests
     # not part of the actual API, but this is quite different in Python 2/3
     def test_encode(self):
-        self.assertTrue(type(discid.util._encode("test")) is type(b"test"))
+        self.assertTrue(type(discid.util._encode("test")) is bytes)
         self.assertEqual(discid.util._encode("test"), b"test")
+        self.assertEqual(discid.util._encode(b"test"), b"test")
+        with self.assertRaises(TypeError):
+            discid.util._encode(42)  # type: ignore
 
     def test_decode(self):
-        self.assertTrue(type(discid.util._decode(b"test"))
-                        is type(b"test".decode()))
+        self.assertTrue(type(discid.util._decode(b"test")) is str)
         self.assertEqual(discid.util._decode(b"test"), "test")
+        self.assertEqual(discid.util._decode("test"), "test")
+        with self.assertRaises(TypeError):
+            discid.util._encode(42)  # type: ignore
 
     def test_encoding(self):
         string = "test"
