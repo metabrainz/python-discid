@@ -45,5 +45,5 @@ dev = [
 src=["discid"]
 
 [tool.ruff.lint]
-select = ["E", "F", "W"]
+select = ["E", "F", "W", "B"]
 ignore = ["E501"]

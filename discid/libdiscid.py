@@ -155,7 +155,7 @@ def _get_features():
         features = ["read"]     # no generic platform yet
         try:
             # test for ISRC/MCN API (introduced 0.3.0)
-            _LIB.discid_get_mcn
+            _LIB.discid_get_mcn  # noqa: B018 (useless-expression)
         except AttributeError:
             pass
         else:
