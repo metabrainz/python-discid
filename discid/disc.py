@@ -395,7 +395,7 @@ class Disc(object):
         This is a :obj:`str <python:str>` object
         and enables generating queries to CDDB servers.
 
-        .. seealso:: `CDDB Server Protocol <http://ftp.freedb.org/pub/freedb/latest/CDDBPROTO>`_
+        .. seealso:: `CDDB Server Protocol <https://gnudb.org/howtognudb.php>`_
         """
         cddb_query_string = "%s %s %s %s" % (
             self.freedb_id,
