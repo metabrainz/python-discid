@@ -6,6 +6,15 @@ repos:
       - id: ruff-check
         args: [--fix]
       - id: ruff-format
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.9.26
+    hooks:
+      - id: pip-compile
+        name: pip-compile doc/requirements.txt
+        args: [pyproject.toml, -o, doc/requirements.txt, --group, docs, --upgrade, --generate-hashes, --universal, --python-version=3.10]
+        files: 'pyproject.toml'
+        stages: [pre-commit]
+        pass_filenames: false
   - repo: local
     hooks:
       - id: pytest
