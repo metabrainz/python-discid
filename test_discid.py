@@ -5,17 +5,30 @@
 import math
 import os
 import unittest
+from dataclasses import dataclass
 
 import discid
 import discid.util
 
+
+@dataclass
+class DiscTestData:
+    name: str
+    first: int
+    last: int
+    sectors: int
+    offsets: list[int]
+    id: str
+    freedb: str
+
+
 test_discs = [
-    {
-        "name": "Guano Apes - Don't give Me Names, without last data track",
-        "first": 1,
-        "last": 15,
-        "sectors": 258725,
-        "offsets": [
+    DiscTestData(
+        name="Guano Apes - Don't give Me Names, without last data track",
+        first=1,
+        last=15,
+        sectors=258725,
+        offsets=[
             150,
             17510,
             33275,
@@ -32,15 +45,15 @@ test_discs = [
             215555,
             235590,
         ],
-        "id": "TqvKjMu7dMliSfmVEBtrL7sBSno-",
-        "freedb": "b60d770f",
-    },
-    {
-        "name": "Lunar - There Is No 1, first track is 2",
-        "first": 2,
-        "last": 11,
-        "sectors": 225781,
-        "offsets": [
+        id="TqvKjMu7dMliSfmVEBtrL7sBSno-",
+        freedb="b60d770f",
+    ),
+    DiscTestData(
+        name="Lunar - There Is No 1, first track is 2",
+        first=2,
+        last=11,
+        sectors=225781,
+        offsets=[
             150,
             11512,
             34143,
@@ -52,9 +65,9 @@ test_discs = [
             195438,
             201127,
         ],
-        "id": "6RDuz0d7.M5SVMLe1z4DP0yaEC8-",
-        "freedb": "840bc20b",
-    },
+        id="6RDuz0d7.M5SVMLe1z4DP0yaEC8-",
+        freedb="840bc20b",
+    ),
 ]
 
 
@@ -124,18 +137,18 @@ class TestModule(unittest.TestCase):
     def test_put_success(self):
         for test_disc in test_discs:
             disc = discid.put(
-                test_disc["first"],
-                test_disc["last"],
-                test_disc["sectors"],
-                test_disc["offsets"],
+                test_disc.first,
+                test_disc.last,
+                test_disc.sectors,
+                test_disc.offsets,
             )
-            self.assertEqual(disc.id, test_disc["id"])
-            self.assertEqual(disc.freedb_id, test_disc["freedb"])
-            self.assertEqual(disc.first_track_num, test_disc["first"])
-            self.assertEqual(disc.last_track_num, test_disc["last"])
-            self.assertEqual(disc.sectors, test_disc["sectors"])
+            self.assertEqual(disc.id, test_disc.id)
+            self.assertEqual(disc.freedb_id, test_disc.freedb)
+            self.assertEqual(disc.first_track_num, test_disc.first)
+            self.assertEqual(disc.last_track_num, test_disc.last)
+            self.assertEqual(disc.sectors, test_disc.sectors)
             track_offsets = [track.offset for track in disc.tracks]
-            self.assertEqual(track_offsets, test_disc["offsets"])
+            self.assertEqual(track_offsets, test_disc.offsets)
             self.assertEqual(
                 disc.sectors, disc.tracks[-1].offset + disc.tracks[-1].sectors
             )
@@ -147,7 +160,7 @@ class TestModule(unittest.TestCase):
                 )
                 self.assertEqual(type(track.seconds), int)
             toc_string = [
-                test_disc["first"],
+                test_disc.first,
                 disc.last_track_num,
                 disc.sectors,
             ] + track_offsets
@@ -255,10 +268,10 @@ class TestDisc(unittest.TestCase):
         disc = discid.read(features=["mcn", "isrc"])  # read from default drive
         test_disc = test_discs[0]
         disc = discid.put(
-            test_disc["first"],
-            test_disc["last"],
-            test_disc["sectors"],
-            test_disc["offsets"],
+            test_disc.first,
+            test_disc.last,
+            test_disc.sectors,
+            test_disc.offsets,
         )
         self.assertTrue(disc.mcn is None)
         for track in disc.tracks:

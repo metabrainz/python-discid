@@ -22,7 +22,7 @@ import math
 SECTORS_PER_SECOND = 75
 
 
-def _encode(string: str | bytes):
+def _encode(string: str | bytes) -> bytes:
     """Encode (unicode) string to byte string"""
     if isinstance(string, str):
         return string.encode()
@@ -33,7 +33,7 @@ def _encode(string: str | bytes):
     # device names should be ASCII
 
 
-def _decode(byte_string: bytes | str):
+def _decode(byte_string: bytes | str) -> str:
     """Decode byte string to (unicode) string"""
     # this test for bytes works on Python 2 and 3
     if isinstance(byte_string, bytes):

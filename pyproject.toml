@@ -33,8 +33,9 @@ Changelog = "https://github.com/metabrainz/python-discid/blob/master/CHANGES.rst
 [dependency-groups]
 test = ["pytest"]
 docs = [
-  "Sphinx~=8.1.3",
-  "sphinx-rtd-theme~=3.0.2",
+  "Sphinx>=8.1.3",
+  "sphinx-autodoc-typehints>=3.0.1",
+  "sphinx-rtd-theme>=3.0.2",
 ]
 dev = [
     "pre-commit>=4.5.1",

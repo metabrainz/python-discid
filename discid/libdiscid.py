@@ -132,7 +132,7 @@ _LIB.discid_get_default_device.argtypes = ()
 _LIB.discid_get_default_device.restype = c_char_p
 
 
-def get_default_device():
+def get_default_device() -> str:
     """The default device to use for :func:`read` on this platform
     given as a :obj:`str <python:str>` object.
     """
