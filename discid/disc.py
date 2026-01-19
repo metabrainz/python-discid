@@ -37,7 +37,7 @@ def read(
     """Reads the TOC from the device given as string
     and returns a :class:`Disc` object.
 
-    That string can be either of :obj:`str <python:str>` or :obj:`bytes`.
+    The device string can be either of :obj:`str <python:str>` or :obj:`bytes`.
     However, it should in no case contain non-ASCII characters.
     If no device is given, a default, also given by :func:`get_default_device`
     is used.
@@ -50,6 +50,9 @@ def read(
     A :exc:`DiscError` exception is raised when the reading fails,
     and :exc:`NotImplementedError` when libdiscid doesn't support
     reading discs on the current platform.
+
+    :param device: the device name to use or :obj:`None` for using the default device
+    :param features: list of features to enable ("read" will always be assumed)
     """
     disc = Disc()
     disc.read(device, features)
@@ -60,16 +63,17 @@ def put(first: int, last: int, disc_sectors: int, track_offsets: list[int]) -> "
     """Creates a TOC based on the information given
     and returns a :class:`Disc` object.
 
-    Takes the `first` track and `last` **audio** track as :obj:`int`.
-    `disc_sectors` is the end of the last audio track,
-    normally the total sector count of the disc.
-    `track_offsets` is a list of all audio track offsets.
-
     Depending on how you get the total sector count,
     you might have to subtract 11400 (2:32 min.) for discs with data tracks.
 
     A :exc:`TOCError` exception is raised when illegal parameters
     are provided.
+
+    :param first: number of the first audio track
+    :param last: number of the last audio track
+    :param disc_sectors: the end of the last audio track, normally the total
+                         sector count of the disc
+    :param track_offsets: list of all audio track offsets
 
     .. seealso:: :musicbrainz:`Disc ID Calculation`
     """

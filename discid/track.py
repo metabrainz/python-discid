@@ -28,7 +28,11 @@ if TYPE_CHECKING:
 
 
 class Track(object):
-    """Track objects are part of the :class:`Disc` class."""
+    """Track objects are part of the :class:`Disc` class.
+
+    :param disc: the :class:`Disc` object
+    :param number: the track number
+    """
 
     def __init__(self, disc: "Disc", number: int):
         self._disc = disc
@@ -98,7 +102,7 @@ class Track(object):
     def isrc(self) -> str | None:
         """The International Standard Recording Code
 
-        This will be `None` when the `"isrc"` feature was not requested
+        This will be :obj:`None` when the `"isrc"` feature was not requested
         or not supported, otherwise this is a :obj:`str <python:str>` object.
         """
         return self._get_track_isrc()
