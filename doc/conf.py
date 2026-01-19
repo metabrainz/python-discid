@@ -1,4 +1,9 @@
-import sys, os
+import ctypes
+import sys
+import os
+
+# to gather version information
+import discid
 
 sys.path.insert(0, os.path.abspath('.'))        # for extensions
 sys.path.insert(0, os.path.abspath('..'))       # for the code
@@ -9,11 +14,7 @@ class Mock(object):
     def __call__(self, *args): return Mock()
     def __getattr__(cls, name): return Mock()
 
-import ctypes
 ctypes.cdll.LoadLibrary = Mock()
-
-# to gather version information
-import discid
 
 # -- General configuration -----------------------------------------------------
 
@@ -121,4 +122,3 @@ texinfo_documents = [
 ]
 
 texinfo_domain_indices = False
-
