@@ -15,18 +15,16 @@
 #
 # Please submit bug reports to GitHub:
 # https://github.com/metabrainz/python-discid/issues
-"""Track class
-"""
+"""Track class"""
 
-from ctypes import c_int, c_void_p, c_char_p
+from ctypes import c_char_p, c_int, c_void_p
 
 from discid.libdiscid import _LIB
 from discid.util import _decode, _sectors_to_seconds
 
 
 class Track(object):
-    """Track objects are part of the :class:`Disc` class.
-    """
+    """Track objects are part of the :class:`Disc` class."""
 
     def __init__(self, disc, number):
         self._disc = disc
@@ -39,12 +37,14 @@ class Track(object):
 
     _LIB.discid_get_track_offset.argtypes = (c_void_p, c_int)
     _LIB.discid_get_track_offset.restype = c_int
+
     def _get_track_offset(self):
         assert self._disc._success
         return _LIB.discid_get_track_offset(self._disc._handle, self.number)
 
     _LIB.discid_get_track_length.argtypes = (c_void_p, c_int)
     _LIB.discid_get_track_length.restype = c_int
+
     def _get_track_length(self):
         assert self._disc._success
         return _LIB.discid_get_track_length(self._disc._handle, self.number)
@@ -54,19 +54,18 @@ class Track(object):
         _LIB.discid_get_track_isrc.restype = c_char_p
     except AttributeError:
         pass
+
     def _get_track_isrc(self):
         assert self._disc._success
         if "isrc" in self._disc._requested_features:
             try:
-                result = _LIB.discid_get_track_isrc(self._disc._handle,
-                                                    self.number)
+                result = _LIB.discid_get_track_isrc(self._disc._handle, self.number)
             except AttributeError:
                 return None
             else:
                 return _decode(result)
         else:
             return None
-
 
     @property
     def number(self):

@@ -10,31 +10,55 @@ import discid
 import discid.util
 
 test_discs = [
-        {
-            "name": "Guano Apes - Don't give Me Names, without last data track",
-            "first": 1,
-            "last" : 15,
-            "sectors": 258725,
-            "offsets": [150, 17510, 33275, 45910,
-                        57805, 78310, 94650,109580, 132010,
-                        149160, 165115, 177710, 203325, 215555, 235590],
-            "id": "TqvKjMu7dMliSfmVEBtrL7sBSno-",
-            "freedb": "b60d770f"
-        },
-        {
-            "name": "Lunar - There Is No 1, first track is 2",
-            "first": 2,
-            "last" : 11,
-            "sectors": 225781,
-            "offsets": [150, 11512, 34143, 50747, 63640, 98491,
-                        123534, 174410, 195438, 201127],
-            "id": "6RDuz0d7.M5SVMLe1z4DP0yaEC8-",
-            "freedb": "840bc20b"
-        },
-    ]
+    {
+        "name": "Guano Apes - Don't give Me Names, without last data track",
+        "first": 1,
+        "last": 15,
+        "sectors": 258725,
+        "offsets": [
+            150,
+            17510,
+            33275,
+            45910,
+            57805,
+            78310,
+            94650,
+            109580,
+            132010,
+            149160,
+            165115,
+            177710,
+            203325,
+            215555,
+            235590,
+        ],
+        "id": "TqvKjMu7dMliSfmVEBtrL7sBSno-",
+        "freedb": "b60d770f",
+    },
+    {
+        "name": "Lunar - There Is No 1, first track is 2",
+        "first": 2,
+        "last": 11,
+        "sectors": 225781,
+        "offsets": [
+            150,
+            11512,
+            34143,
+            50747,
+            63640,
+            98491,
+            123534,
+            174410,
+            195438,
+            201127,
+        ],
+        "id": "6RDuz0d7.M5SVMLe1z4DP0yaEC8-",
+        "freedb": "840bc20b",
+    },
+]
+
 
 class TestModulePrivate(unittest.TestCase):
-
     # lots of encoding tests
     # not part of the actual API, but this is quite different in Python 2/3
     def test_encode(self):
@@ -53,15 +77,14 @@ class TestModulePrivate(unittest.TestCase):
 
     def test_encoding(self):
         string = "test"
-        self.assertEqual(discid.util._decode(discid.util._encode(string)),
-                         string)
+        self.assertEqual(discid.util._decode(discid.util._encode(string)), string)
         bytestring = b"test"
-        self.assertEqual(discid.util._encode(discid.util._decode(bytestring)),
-                         bytestring)
+        self.assertEqual(
+            discid.util._encode(discid.util._decode(bytestring)), bytestring
+        )
 
 
 class TestModule(unittest.TestCase):
-
     def test_version_string(self):
         version_string = discid.LIBDISCID_VERSION_STRING
         self.assertTrue(version_string is not None, "No version string given")
@@ -92,8 +115,7 @@ class TestModule(unittest.TestCase):
         # not enough offsets
         self.assertRaises(discid.TOCError, discid.put, 1, 2, 150, [150])
         # too many offsets
-        self.assertRaises(discid.TOCError,
-                          discid.put, 1, 2, 1000, [150, 500, 750])
+        self.assertRaises(discid.TOCError, discid.put, 1, 2, 1000, [150, 500, 750])
         # total sectors / offset mismatch
         self.assertRaises(discid.TOCError, discid.put, 1, 2, 150, [150, 500])
         # too many tracks
@@ -101,8 +123,12 @@ class TestModule(unittest.TestCase):
 
     def test_put_success(self):
         for test_disc in test_discs:
-            disc = discid.put(test_disc["first"], test_disc["last"],
-                            test_disc["sectors"], test_disc["offsets"])
+            disc = discid.put(
+                test_disc["first"],
+                test_disc["last"],
+                test_disc["sectors"],
+                test_disc["offsets"],
+            )
             self.assertEqual(disc.id, test_disc["id"])
             self.assertEqual(disc.freedb_id, test_disc["freedb"])
             self.assertEqual(disc.first_track_num, test_disc["first"])
@@ -110,29 +136,36 @@ class TestModule(unittest.TestCase):
             self.assertEqual(disc.sectors, test_disc["sectors"])
             track_offsets = [track.offset for track in disc.tracks]
             self.assertEqual(track_offsets, test_disc["offsets"])
-            self.assertEqual(disc.sectors,
-                            disc.tracks[-1].offset + disc.tracks[-1].sectors)
+            self.assertEqual(
+                disc.sectors, disc.tracks[-1].offset + disc.tracks[-1].sectors
+            )
             self.assertEqual(disc.seconds, math.floor((disc.sectors / 75.0) + 0.5))
             self.assertEqual(type(disc.seconds), int)
             for track in disc.tracks:
-                self.assertEqual(track.seconds,
-                                math.floor((track.sectors / 75.0) + 0.5))
+                self.assertEqual(
+                    track.seconds, math.floor((track.sectors / 75.0) + 0.5)
+                )
                 self.assertEqual(type(track.seconds), int)
-            toc_string = [test_disc["first"], disc.last_track_num, disc.sectors] + track_offsets
+            toc_string = [
+                test_disc["first"],
+                disc.last_track_num,
+                disc.sectors,
+            ] + track_offsets
             toc_string = " ".join(map(str, toc_string))
             self.assertEqual(disc.toc_string, toc_string)
-            cddb_query_string = [disc.freedb_id, disc.last_track_num] + track_offsets + [disc.seconds]
+            cddb_query_string = (
+                [disc.freedb_id, disc.last_track_num] + track_offsets + [disc.seconds]
+            )
             cddb_query_string = " ".join(map(str, cddb_query_string))
             self.assertEqual(disc.cddb_query_string, cddb_query_string)
 
 
 @unittest.skipUnless(
-    os.environ.get('PYTHON_DISCID_TEST_DEVICE'),
+    os.environ.get("PYTHON_DISCID_TEST_DEVICE"),
     "tests require physical CD drive with inserted disc",
 )
 class TestDisc(unittest.TestCase):
-    """Test reading the disc currently in the drive
-    """
+    """Test reading the disc currently in the drive"""
 
     def test_default_device(self):
         # Can't be empty, in contrast to the test in TestModule
@@ -145,22 +178,23 @@ class TestDisc(unittest.TestCase):
         self.assertTrue(features, "No feature list given")
 
     def test_read_simple(self):
-        disc = discid.read()        # read from default drive
+        disc = discid.read()  # read from default drive
         self.assertEqual(len(disc.id), 28, "Invalid Disc ID")
         self.assertEqual(len(disc.freedb_id), 8, "Invalid FreeDB Disc ID")
         self.assertTrue(disc.submission_url, "Invalid submission url")
         self.assertTrue(disc.toc_string, "Invalid toc string")
-        self.assertEqual(disc.last_track_num, len(disc.tracks),
-                        "Wrong amount of tracks")
-        self.assertEqual(disc.sectors,
-                         disc.tracks[-1].offset + disc.tracks[-1].sectors)
+        self.assertEqual(
+            disc.last_track_num, len(disc.tracks), "Wrong amount of tracks"
+        )
+        self.assertEqual(disc.sectors, disc.tracks[-1].offset + disc.tracks[-1].sectors)
 
         for track in disc.tracks:
             self.assertTrue(track.offset <= disc.sectors, "Invalid offset")
             if track.number > 1:
-                previous_offset = disc.tracks[track.number-2].offset
-                self.assertTrue(track.offset >= previous_offset,
-                                "Invalid offset series")
+                previous_offset = disc.tracks[track.number - 2].offset
+                self.assertTrue(
+                    track.offset >= previous_offset, "Invalid offset series"
+                )
 
         # additional features should be unset, not empty
         self.assertTrue(disc.mcn is None)
@@ -181,29 +215,26 @@ class TestDisc(unittest.TestCase):
 
         disc = discid.put(first, last, sectors, track_offsets)
         self.assertEqual(disc.id, disc_id, "different id after put")
-        self.assertEqual(disc.freedb_id, freedb_id,
-                         "different freedb id after put")
-        self.assertEqual(disc.submission_url, submission_url,
-                         "different submission_url after put")
-        self.assertEqual(disc.toc_string, toc_string,
-                         "different toc_string after put")
-        self.assertEqual(disc.first_track_num, first,
-                         "different first track after put")
-        self.assertEqual(disc.last_track_num, last,
-                         "different last track after put")
-        self.assertEqual(disc.sectors, sectors,
-                         "different sector count after put")
+        self.assertEqual(disc.freedb_id, freedb_id, "different freedb id after put")
+        self.assertEqual(
+            disc.submission_url, submission_url, "different submission_url after put"
+        )
+        self.assertEqual(disc.toc_string, toc_string, "different toc_string after put")
+        self.assertEqual(disc.first_track_num, first, "different first track after put")
+        self.assertEqual(disc.last_track_num, last, "different last track after put")
+        self.assertEqual(disc.sectors, sectors, "different sector count after put")
         new_offsets = [track.offset for track in disc.tracks]
-        self.assertEqual(new_offsets, track_offsets,
-                         "different offsets after put")
+        self.assertEqual(new_offsets, track_offsets, "different offsets after put")
         new_sectors = [track.sectors for track in disc.tracks]
-        self.assertEqual(new_sectors, track_sectors,
-                         "different lengths after put")
-        self.assertEqual(disc.cddb_query_string, cddb_query_string,
-                         "different cddb_query_string after put")
+        self.assertEqual(new_sectors, track_sectors, "different lengths after put")
+        self.assertEqual(
+            disc.cddb_query_string,
+            cddb_query_string,
+            "different cddb_query_string after put",
+        )
 
     def test_read_features(self):
-        disc = discid.read(features=["mcn", "isrc"]) # read from default drive
+        disc = discid.read(features=["mcn", "isrc"])  # read from default drive
         self.assertEqual(len(disc.id), 28, "Invalid Disc ID")
         self.assertTrue(disc.submission_url, "Invalid submission url")
         self.assertTrue(disc.toc_string, "Invalid toc string")
@@ -221,10 +252,14 @@ class TestDisc(unittest.TestCase):
 
     def test_read_put(self):
         # a read followed with a put, which should clear the features
-        disc = discid.read(features=["mcn", "isrc"]) # read from default drive
+        disc = discid.read(features=["mcn", "isrc"])  # read from default drive
         test_disc = test_discs[0]
-        disc = discid.put(test_disc["first"], test_disc["last"],
-                          test_disc["sectors"], test_disc["offsets"])
+        disc = discid.put(
+            test_disc["first"],
+            test_disc["last"],
+            test_disc["sectors"],
+            test_disc["offsets"],
+        )
         self.assertTrue(disc.mcn is None)
         for track in disc.tracks:
             self.assertTrue(track.isrc is None)

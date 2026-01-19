@@ -15,22 +15,21 @@
 #
 # Please submit bug reports to GitHub:
 # https://github.com/metabrainz/python-discid/issues
-"""Disc class
-"""
+"""Disc class"""
 
 import re
-from ctypes import c_int, c_void_p, c_char_p, c_uint
+from ctypes import c_char_p, c_int, c_uint, c_void_p
 
 from discid.libdiscid import _LIB, FEATURES
-from discid.util import _encode, _decode, _sectors_to_seconds
 from discid.track import Track
-
+from discid.util import _decode, _encode, _sectors_to_seconds
 
 # our implementation of libdiscid's enum discid_feature
 _FEATURE_MAPPING = {"read": 1 << 0, "mcn": 1 << 1, "isrc": 1 << 2}
 
 
 FEATURES_IMPLEMENTED = list(_FEATURE_MAPPING.keys())
+
 
 def read(device=None, features=None):
     """Reads the TOC from the device given as string
@@ -53,6 +52,7 @@ def read(device=None, features=None):
     disc = Disc()
     disc.read(device, features)
     return disc
+
 
 def put(first, last, disc_sectors, track_offsets):
     """Creates a TOC based on the information given
@@ -77,23 +77,25 @@ def put(first, last, disc_sectors, track_offsets):
 
 
 class DiscError(IOError):
-    """:func:`read` will raise this exception when an error occurred.
-    """
+    """:func:`read` will raise this exception when an error occurred."""
+
     pass
+
 
 class TOCError(Exception):
     """:func:`put` will raise this exception when illegal parameters
     are provided.
     """
+
     pass
 
 
 class Disc(object):
-    """The class of the object returned by :func:`read` or :func:`put`.
-    """
+    """The class of the object returned by :func:`read` or :func:`put`."""
 
     _LIB.discid_new.argtypes = ()
     _LIB.discid_new.restype = c_void_p
+
     def __init__(self):
         """The initialization will reserve some memory
         for internal data structures.
@@ -107,14 +109,13 @@ class Disc(object):
         assert self._success
         return self.id
 
-    _LIB.discid_get_error_msg.argtypes = (c_void_p, )
+    _LIB.discid_get_error_msg.argtypes = (c_void_p,)
     _LIB.discid_get_error_msg.restype = c_char_p
+
     def _get_error_msg(self):
-        """Get the error message for the last error with the object.
-        """
+        """Get the error message for the last error with the object."""
         error = _LIB.discid_get_error_msg(self._handle)
         return _decode(error)
-
 
     _LIB.discid_read.argtypes = (c_void_p, c_char_p)
     _LIB.discid_read.restype = c_int
@@ -123,6 +124,7 @@ class Disc(object):
         _LIB.discid_read_sparse.restype = c_int
     except AttributeError:
         pass
+
     def read(self, device=None, features=None):
         """Reads the TOC from the device given as string
 
@@ -135,8 +137,9 @@ class Disc(object):
             features = []
 
         # only use features implemented on this platform and in this module
-        self._requested_features = list(set(features) & set(FEATURES)
-                                        & set(FEATURES_IMPLEMENTED))
+        self._requested_features = list(
+            set(features) & set(FEATURES) & set(FEATURES_IMPLEMENTED)
+        )
 
         # create the bitmask for libdiscid
         c_features = 0
@@ -145,8 +148,9 @@ class Disc(object):
 
         # device = None will use the default device (internally)
         try:
-            result = _LIB.discid_read_sparse(self._handle, _encode(device),
-                                             c_features) == 1
+            result = (
+                _LIB.discid_read_sparse(self._handle, _encode(device), c_features) == 1
+            )
         except AttributeError:
             result = _LIB.discid_read(self._handle, _encode(device)) == 1
         self._success = result
@@ -156,6 +160,7 @@ class Disc(object):
 
     _LIB.discid_put.argtypes = (c_void_p, c_int, c_int, c_void_p)
     _LIB.discid_put.restype = c_int
+
     def put(self, first, last, disc_sectors, track_offsets):
         """Creates a TOC based on the input given.
 
@@ -185,27 +190,27 @@ class Disc(object):
             raise TOCError(self._get_error_msg())
         return self._success
 
-
-    _LIB.discid_get_id.argtypes = (c_void_p, )
+    _LIB.discid_get_id.argtypes = (c_void_p,)
     _LIB.discid_get_id.restype = c_char_p
+
     def _get_id(self):
-        """Gets the current MusicBrainz disc ID
-        """
+        """Gets the current MusicBrainz disc ID"""
         assert self._success
         result = _LIB.discid_get_id(self._handle)
         return _decode(result)
 
-    _LIB.discid_get_freedb_id.argtypes = (c_void_p, )
+    _LIB.discid_get_freedb_id.argtypes = (c_void_p,)
     _LIB.discid_get_freedb_id.restype = c_char_p
+
     def _get_freedb_id(self):
-        """Gets the current FreeDB disc ID
-        """
+        """Gets the current FreeDB disc ID"""
         assert self._success
         result = _LIB.discid_get_freedb_id(self._handle)
         return _decode(result)
 
-    _LIB.discid_get_submission_url.argtypes = (c_void_p, )
+    _LIB.discid_get_submission_url.argtypes = (c_void_p,)
     _LIB.discid_get_submission_url.restype = c_char_p
+
     def _get_submission_url(self):
         """Give an URL to submit the current TOC
         as a new Disc ID to MusicBrainz.
@@ -215,10 +220,11 @@ class Disc(object):
         return _decode(result)
 
     try:
-        _LIB.discid_get_toc_string.argtypes = (c_void_p, )
+        _LIB.discid_get_toc_string.argtypes = (c_void_p,)
         _LIB.discid_get_toc_string.restype = c_char_p
     except AttributeError:
         pass
+
     def _get_toc_string(self):
         """The TOC suitable as value of the `toc parameter`
         when accessing the MusicBrainz Web Service.
@@ -231,38 +237,38 @@ class Disc(object):
         else:
             return _decode(result)
 
-    _LIB.discid_get_first_track_num.argtypes = (c_void_p, )
+    _LIB.discid_get_first_track_num.argtypes = (c_void_p,)
     _LIB.discid_get_first_track_num.restype = c_int
+
     def _get_first_track_num(self):
-        """Gets the first track number
-        """
+        """Gets the first track number"""
         assert self._success
         return _LIB.discid_get_first_track_num(self._handle)
 
-    _LIB.discid_get_last_track_num.argtypes = (c_void_p, )
+    _LIB.discid_get_last_track_num.argtypes = (c_void_p,)
     _LIB.discid_get_last_track_num.restype = c_int
+
     def _get_last_track_num(self):
-        """Gets the last track number
-        """
+        """Gets the last track number"""
         assert self._success
         return _LIB.discid_get_last_track_num(self._handle)
 
-    _LIB.discid_get_sectors.argtypes = (c_void_p, )
+    _LIB.discid_get_sectors.argtypes = (c_void_p,)
     _LIB.discid_get_sectors.restype = c_int
+
     def _get_sectors(self):
-        """Gets the total number of sectors on the disc
-        """
+        """Gets the total number of sectors on the disc"""
         assert self._success
         return _LIB.discid_get_sectors(self._handle)
 
     try:
-        _LIB.discid_get_mcn.argtypes = (c_void_p, )
+        _LIB.discid_get_mcn.argtypes = (c_void_p,)
         _LIB.discid_get_mcn.restype = c_char_p
     except AttributeError:
         pass
+
     def _get_mcn(self):
-        """Gets the current Media Catalogue Number (MCN/UPC/EAN)
-        """
+        """Gets the current Media Catalogue Number (MCN/UPC/EAN)"""
         assert self._success
         if "mcn" in self._requested_features:
             try:
@@ -273,7 +279,6 @@ class Disc(object):
                 return _decode(result)
         else:
             return None
-
 
     @property
     def id(self):
@@ -368,14 +373,12 @@ class Disc(object):
 
     @property
     def tracks(self):
-        """A list of :class:`Track` objects for this Disc.
-        """
+        """A list of :class:`Track` objects for this Disc."""
         tracks = []
         assert self._success
         for number in range(self.first_track_num, self.last_track_num + 1):
             tracks.append(Track(self, number))
         return tracks
-
 
     @property
     def cddb_query_string(self):
@@ -394,12 +397,11 @@ class Disc(object):
         )
         return cddb_query_string
 
-
-    _LIB.discid_free.argtypes = (c_void_p, )
+    _LIB.discid_free.argtypes = (c_void_p,)
     _LIB.discid_free.restype = None
+
     def _free(self):
-        """This will free the internal allocated memory for the object.
-        """
+        """This will free the internal allocated memory for the object."""
         _LIB.discid_free(self._handle)
         self._handle = None
 

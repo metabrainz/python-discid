@@ -20,10 +20,10 @@
 The code that works with Disc objects is in disc.py
 """
 
+import ctypes
 import os
 import sys
-import ctypes
-from ctypes import c_void_p, c_char_p
+from ctypes import c_char_p, c_void_p
 from ctypes.util import find_library
 
 from discid.util import _decode
@@ -33,16 +33,18 @@ _LIB_MAJOR_VERSION = 0
 
 
 def _find_library(name, version=0):
-    """Find a library by base-name and major version
-    """
-    windows_names = ["%s.dll" % name, "lib%s.dll" % name,
-                     "lib%s-%d.dll" % (name, version)]
+    """Find a library by base-name and major version"""
+    windows_names = [
+        "%s.dll" % name,
+        "lib%s.dll" % name,
+        "lib%s-%d.dll" % (name, version),
+    ]
 
     lib_file = None
 
     # This seems to be necessary in a bundle/dmg
     if sys.platform == "darwin":
-        lib_name = '../Frameworks/lib%s.%d.dylib' % (name, version)
+        lib_name = "../Frameworks/lib%s.%d.dylib" % (name, version)
         if os.path.isfile(lib_name):
             lib_file = lib_name
 
@@ -92,9 +94,9 @@ def _find_library(name, version=0):
 
     return lib_file
 
+
 def _open_library(lib_name):
-    """Open a library by name or location
-    """
+    """Open a library by name or location"""
     try:
         return ctypes.cdll.LoadLibrary(lib_name)
     except OSError as exc:
@@ -104,9 +106,9 @@ def _open_library(lib_name):
         else:
             raise
 
+
 _LIB_NAME = _find_library(_LIB_BASE_NAME, _LIB_MAJOR_VERSION)
 _LIB = _open_library(_LIB_NAME)
-
 
 
 try:
@@ -114,9 +116,10 @@ try:
     _LIB.discid_get_version_string.restype = c_char_p
 except AttributeError:
     pass
+
+
 def _get_version_string():
-    """Get the version string of libdiscid
-    """
+    """Get the version string of libdiscid"""
     try:
         version_string = _LIB.discid_get_version_string()
     except AttributeError:
@@ -124,8 +127,11 @@ def _get_version_string():
     else:
         return _decode(version_string)
 
+
 _LIB.discid_get_default_device.argtypes = ()
 _LIB.discid_get_default_device.restype = c_char_p
+
+
 def get_default_device():
     """The default device to use for :func:`read` on this platform
     given as a :obj:`str <python:str>` object.
@@ -133,16 +139,18 @@ def get_default_device():
     device = _LIB.discid_get_default_device()
     return _decode(device)
 
+
 try:
-    _LIB.discid_get_feature_list.argtypes = (c_void_p, )
+    _LIB.discid_get_feature_list.argtypes = (c_void_p,)
     _LIB.discid_get_feature_list.restype = None
 except AttributeError:
     _features_available = False
 else:
     _features_available = True
+
+
 def _get_features():
-    """Get the supported features for the platform.
-    """
+    """Get the supported features for the platform."""
     features = []
     if _features_available:
         c_features = (c_char_p * 32)()
@@ -152,7 +160,7 @@ def _get_features():
                 features.append(_decode(feature))
     else:
         # libdiscid <= 0.4.0
-        features = ["read"]     # no generic platform yet
+        features = ["read"]  # no generic platform yet
         try:
             # test for ISRC/MCN API (introduced 0.3.0)
             _LIB.discid_get_mcn  # noqa: B018 (useless-expression)
@@ -160,14 +168,17 @@ def _get_features():
             pass
         else:
             # ISRC/MCN API found -> libdiscid = 0.3.x
-            if (sys.platform.startswith("linux") and
-                    not os.path.isfile("/usr/lib/libdiscid.so.0.3.0")
-                    and not os.path.isfile("/usr/lib64/libdiscid.so.0.3.0")):
+            if (
+                sys.platform.startswith("linux")
+                and not os.path.isfile("/usr/lib/libdiscid.so.0.3.0")
+                and not os.path.isfile("/usr/lib64/libdiscid.so.0.3.0")
+            ):
                 features += ["mcn", "isrc"]
             elif sys.platform in ["darwin", "win32"]:
                 features += ["mcn", "isrc"]
 
     return features
+
 
 LIBDISCID_VERSION_STRING = _get_version_string()
 

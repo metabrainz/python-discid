@@ -15,33 +15,33 @@
 #
 # Please submit bug reports to GitHub:
 # https://github.com/metabrainz/python-discid/issues
-"""utility functions
-"""
+"""utility functions"""
 
 import math
 
 SECTORS_PER_SECOND = 75
 
-def _encode(string: str|bytes):
-    """Encode (unicode) string to byte string
-    """
+
+def _encode(string: str | bytes):
+    """Encode (unicode) string to byte string"""
     if isinstance(string, str):
         return string.encode()
     elif isinstance(string, bytes):
         return string
-    raise TypeError('Unexpected type, expected string or bytes')
+    raise TypeError("Unexpected type, expected string or bytes")
     # UnicodeDecodeError (Python 2) is NOT caught
     # device names should be ASCII
 
-def _decode(byte_string: bytes|str):
-    """Decode byte string to (unicode) string
-    """
+
+def _decode(byte_string: bytes | str):
+    """Decode byte string to (unicode) string"""
     # this test for bytes works on Python 2 and 3
     if isinstance(byte_string, bytes):
         return byte_string.decode()
     elif isinstance(byte_string, str):
         return byte_string
-    raise TypeError('Unexpected type, expected string or bytes')
+    raise TypeError("Unexpected type, expected string or bytes")
+
 
 def _sectors_to_seconds(sectors):
     """Round sectors to seconds like done on MusicBrainz Server
