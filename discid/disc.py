@@ -147,12 +147,13 @@ class Disc(object):
             c_features += _FEATURE_MAPPING.get(feature, 0)
 
         # device = None will use the default device (internally)
+        if device is not None:
+            device = _encode(device)
+
         try:
-            result = (
-                _LIB.discid_read_sparse(self._handle, _encode(device), c_features) == 1
-            )
+            result = _LIB.discid_read_sparse(self._handle, device, c_features) == 1
         except AttributeError:
-            result = _LIB.discid_read(self._handle, _encode(device)) == 1
+            result = _LIB.discid_read(self._handle, device) == 1
         self._success = result
         if not self._success:
             raise DiscError(self._get_error_msg())
