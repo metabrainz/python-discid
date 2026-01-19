@@ -31,7 +31,9 @@ _FEATURE_MAPPING = {"read": 1 << 0, "mcn": 1 << 1, "isrc": 1 << 2}
 FEATURES_IMPLEMENTED = list(_FEATURE_MAPPING.keys())
 
 
-def read(device=None, features=None):
+def read(
+    device: str | bytes | None = None, features: list[str] | None = None
+) -> "Disc":
     """Reads the TOC from the device given as string
     and returns a :class:`Disc` object.
 
@@ -54,7 +56,7 @@ def read(device=None, features=None):
     return disc
 
 
-def put(first, last, disc_sectors, track_offsets):
+def put(first: int, last: int, disc_sectors: int, track_offsets: list[int]) -> "Disc":
     """Creates a TOC based on the information given
     and returns a :class:`Disc` object.
 
@@ -125,7 +127,9 @@ class Disc(object):
     except AttributeError:
         pass
 
-    def read(self, device=None, features=None):
+    def read(
+        self, device: str | bytes | None = None, features: list[str] | None = None
+    ) -> bool:
         """Reads the TOC from the device given as string
 
         The user is supposed to use :func:`discid.read`.
@@ -162,7 +166,9 @@ class Disc(object):
     _LIB.discid_put.argtypes = (c_void_p, c_int, c_int, c_void_p)
     _LIB.discid_put.restype = c_int
 
-    def put(self, first, last, disc_sectors, track_offsets):
+    def put(
+        self, first: int, last: int, disc_sectors: int, track_offsets: list[int]
+    ) -> bool:
         """Creates a TOC based on the input given.
 
         The user is supposed to use :func:`discid.put`.
@@ -282,21 +288,21 @@ class Disc(object):
             return None
 
     @property
-    def id(self):
+    def id(self) -> str:
         """This is the MusicBrainz :musicbrainz:`Disc ID`,
         a :obj:`str <python:str>` object.
         """
         return self._get_id()
 
     @property
-    def freedb_id(self):
+    def freedb_id(self) -> str:
         """This is the :musicbrainz:`FreeDB` Disc ID (without category),
         a :obj:`str <python:str>` object.
         """
         return self._get_freedb_id()
 
     @property
-    def submission_url(self):
+    def submission_url(self) -> str | None:
         """Disc ID / TOC Submission URL for MusicBrainz
 
         With this url you can submit the current TOC
@@ -313,7 +319,7 @@ class Disc(object):
             return url
 
     @property
-    def toc_string(self):
+    def toc_string(self) -> str:
         """The TOC suitable as value of the `toc parameter`
         when accessing the MusicBrainz Web Service.
 
@@ -337,17 +343,17 @@ class Disc(object):
             return toc_string
 
     @property
-    def first_track_num(self):
+    def first_track_num(self) -> int:
         """Number of the first track"""
         return self._get_first_track_num()
 
     @property
-    def last_track_num(self):
+    def last_track_num(self) -> int:
         """Number of the last **audio** track"""
         return self._get_last_track_num()
 
     @property
-    def sectors(self):
+    def sectors(self) -> int:
         """Total length in sectors"""
         return self._get_sectors()
 
@@ -355,15 +361,12 @@ class Disc(object):
     """This is an alias for :attr:`sectors`"""
 
     @property
-    def seconds(self):
+    def seconds(self) -> int:
         """Total length in seconds"""
-        if self.sectors is None:
-            return None
-        else:
-            return _sectors_to_seconds(self.sectors)
+        return _sectors_to_seconds(self.sectors)
 
     @property
-    def mcn(self):
+    def mcn(self) -> str | None:
         """This is the Media Catalogue Number (MCN/UPC/EAN)
 
         It is set after the `"mcn"` feature was requested on a read
@@ -373,7 +376,7 @@ class Disc(object):
         return self._get_mcn()
 
     @property
-    def tracks(self):
+    def tracks(self) -> list[Track]:
         """A list of :class:`Track` objects for this Disc."""
         tracks = []
         assert self._success
@@ -382,7 +385,7 @@ class Disc(object):
         return tracks
 
     @property
-    def cddb_query_string(self):
+    def cddb_query_string(self) -> str:
         """A CDDB query string suitable for querying CDDB servers.
 
         This is a :obj:`str <python:str>` object

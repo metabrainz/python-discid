@@ -18,18 +18,22 @@
 """Track class"""
 
 from ctypes import c_char_p, c_int, c_void_p
+from typing import TYPE_CHECKING
 
 from discid.libdiscid import _LIB
 from discid.util import _decode, _sectors_to_seconds
+
+if TYPE_CHECKING:
+    from .disc import Disc
 
 
 class Track(object):
     """Track objects are part of the :class:`Disc` class."""
 
-    def __init__(self, disc, number):
+    def __init__(self, disc: "Disc", number: int):
         self._disc = disc
         self._number = number
-        assert self._disc._handle.value is not None
+        assert self._disc._handle and self._disc._handle.value is not None
 
     def __str__(self):
         assert self._disc._success
@@ -68,17 +72,17 @@ class Track(object):
             return None
 
     @property
-    def number(self):
+    def number(self) -> int:
         """The track number"""
         return self._number
 
     @property
-    def offset(self):
+    def offset(self) -> int:
         """The track offset"""
         return self._get_track_offset()
 
     @property
-    def sectors(self):
+    def sectors(self) -> int:
         """The track length in sectors"""
         return self._get_track_length()
 
@@ -86,12 +90,12 @@ class Track(object):
     """This is an alias for :attr:`sectors`"""
 
     @property
-    def seconds(self):
+    def seconds(self) -> int:
         """Track length in seconds"""
         return _sectors_to_seconds(self.sectors)
 
     @property
-    def isrc(self):
+    def isrc(self) -> str | None:
         """The International Standard Recording Code
 
         This will be `None` when the `"isrc"` feature was not requested
