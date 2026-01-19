@@ -2,7 +2,7 @@ Libdiscid Python bindings
 -------------------------
 
 Python-discid implements Python bindings for MusicBrainz Libdiscid. This
-module supports Python 3 >= 3.9.
+module supports Python 3 >= 3.10.
 Libdiscid >= 0.2.2 is needed.
 
 Libdiscid's main purpose is the calculation of an identifier of audio
