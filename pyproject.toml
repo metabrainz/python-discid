@@ -43,3 +43,7 @@ dev = [
 
 [tool.ruff]
 src=["discid"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+ignore = ["E501"]
