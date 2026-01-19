@@ -10,7 +10,7 @@ authors = [
   {name = "Johannes Dewender", email = "brainz@JonnyJD.net"},
   {name = "Philipp Wolfer", email = "ph.wolfer@gmail.com"},
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 readme = "README.rst"
 license = "LGPL-3.0-or-later"
 license-files = ["COPYING.LESSER"]
