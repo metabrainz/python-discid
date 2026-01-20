@@ -35,7 +35,6 @@ def _encode(string: str | bytes) -> bytes:
 
 def _decode(byte_string: bytes | str) -> str:
     """Decode byte string to (unicode) string"""
-    # this test for bytes works on Python 2 and 3
     if isinstance(byte_string, bytes):
         return byte_string.decode()
     elif isinstance(byte_string, str):

@@ -73,7 +73,7 @@ test_discs = [
 
 class TestModulePrivate(unittest.TestCase):
     # lots of encoding tests
-    # not part of the actual API, but this is quite different in Python 2/3
+    # not part of the actual API, but used internally to handle both bytes and str
     def test_encode(self):
         self.assertTrue(type(discid.util._encode("test")) is bytes)
         self.assertEqual(discid.util._encode("test"), b"test")
