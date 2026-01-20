@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.abspath(".."))  # for the code
 # -- Mock libdiscid loading ----------------------------------------------------
 
 
-class Mock(object):
+class Mock:
     def __call__(self, *args):
         return Mock()
 

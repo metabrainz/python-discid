@@ -27,7 +27,7 @@ if TYPE_CHECKING:
     from .disc import Disc
 
 
-class Track(object):
+class Track:
     """Track objects are part of the :class:`Disc` class.
 
     :param disc: the :class:`Disc` object
