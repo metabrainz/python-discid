@@ -8,10 +8,10 @@ The basic use case is::
  # this will load libdiscid
  import discid
 
- print("device: %s" % discid.get_default_device())
- disc = discid.read()        # reads from default device
- print("id: %s" % disc.id)
- print("submission url:\n%s" % disc.submission_url)
+ print(f"device: {discid.get_default_device()}")
+ disc = discid.read()  # reads from default device
+ print(f"id: {disc.id}")
+ print(f"submission url:\n{disc.submission_url}")
 
 You can also set the device explicitly::
 
@@ -30,9 +30,9 @@ You can get details about the tracks an fetch additional features
 like the ISRCs and the MCN, which is basically the EAN/UPC of the disc::
 
  disc = discid.read(features=["mcn", "isrc"])
- print("mcn: %s" % disc.mcn)
+ print(f"mcn: {disc.mcn}")
  for track in disc.tracks:
-     print("{num:>2}: {isrc:13}".format(num=track.number, isrc=track.isrc))
+     print(f"{track.number:>2}: {track.isrc:13}")
 
 Without Disc Access
 -------------------
@@ -51,9 +51,9 @@ An example for the TOC
  sectors = 258725
  offsets = [150, 17510, ..., 235590]
  disc = discid.put(first, last, sectors, offsets)
- print("id: %s" % disc.id)
+ print(f"id: {disc.id}")
  last_track = disc.tracks[disc.last_track_num - 1]
- print("last track length: %s seconds" % last_track.seconds)
+ print(f"last track length: {last_track.seconds} seconds")
 
 .. note:: The example disc has track 16 as a multimedia/data track.
    The sector count for the disc is the ending sector for track 15!
@@ -84,12 +84,13 @@ The relevant function is :func:`musicbrainzngs.get_releases_by_discid`::
      print("disc not found or bad response")
  else:
      if result.get("disc"):
-         print("artist:\t%s" %
-               result["disc"]["release-list"][0]["artist-credit-phrase"])
-         print("title:\t%s" % result["disc"]["release-list"][0]["title"])
+         first_release = result["disc"]["release-list"][0]
+         print(f"artist:\t{first_release['artist-credit-phrase']}")
+         print(f"title:\t{first_release['title']}")
      elif result.get("cdstub"):
-         print("artist:\t" % result["cdstub"]["artist"])
-         print("title:\t" % result["cdstub"]["title"])
+         cdstub = result["cdstub"]
+         print(f"artist:\t{cdstub['artist']}")
+         print(f"title:\t{cdstub['title']}")
 
 You can fetch much more data.
 See :mod:`musicbrainzngs` for details.

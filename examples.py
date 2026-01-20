@@ -8,38 +8,30 @@ import discid
 
 def simple_example():
     disc = discid.read()  # use default device
-    print("id: %s" % disc.id)
-    print("used %s as device" % discid.get_default_device())
-    print("submit with:\n%s" % disc.submission_url)
+    print(f"id: {disc.id}")
+    print(f"used {discid.get_default_device()} as device")
+    print(f"submit with:\n{disc.submission_url}")
 
 
 def _length_str(seconds, sectors):
     hours = seconds // 3600
     seconds = seconds % 3600
     if hours:
-        return "{h}:{m:>02}:{s:>02} ({sectors:>6})".format(
-            h=hours, m=(seconds // 60), s=(seconds % 60), sectors=sectors
-        )
+        return f"{hours}:{seconds // 60:>02}:{seconds % 60:>02} ({sectors:>6})"
     else:
-        return "  {m:>2}:{s:>02} ({sectors:>6})".format(
-            m=(seconds // 60), s=(seconds % 60), sectors=sectors
-        )
+        return f"  {seconds // 60:>2}:{seconds % 60:>02} ({sectors:>6})"
 
 
 def complex_example():
     device_name = discid.get_default_device()
     disc = discid.read(device_name, ["mcn", "isrc"])
-    print("device:\t%s" % device_name)
-    print("id:\t%s" % disc.id)
-    print("MCN:\t%s" % disc.mcn)
-    print("length:\t%s" % _length_str(disc.seconds, disc.sectors))
+    print(f"device:\t{device_name}")
+    print(f"id:\t{disc.id}")
+    print(f"MCN:\t{disc.mcn}")
+    print(f"length:\t{_length_str(disc.seconds, disc.sectors)}")
     for track in disc.tracks:
         length = _length_str(track.seconds, track.sectors)
-        print(
-            "{num:>2}: {offset:>6} {len}\tISRC: {isrc:13}".format(
-                num=track.number, offset=track.offset, len=length, isrc=track.isrc
-            )
-        )
+        print(f"{track.number:>2}: {track.offset:>6} {length}\tISRC: {track.isrc}")
 
 
 if __name__ == "__main__":

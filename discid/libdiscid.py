@@ -35,16 +35,16 @@ _LIB_MAJOR_VERSION = 0
 def _find_library(name: str, version: int = 0) -> str:
     """Find a library by base-name and major version"""
     windows_names = [
-        "%s.dll" % name,
-        "lib%s.dll" % name,
-        "lib%s-%d.dll" % (name, version),
+        f"{name}.dll",
+        f"lib{name}.dll",
+        f"lib{name}-{version}.dll",
     ]
 
     lib_file = None
 
     # This seems to be necessary in a bundle/dmg
     if sys.platform == "darwin":
-        lib_name = "../Frameworks/lib%s.%d.dylib" % (name, version)
+        lib_name = f"../Frameworks/lib{name}.{version}.dylib"
         if os.path.isfile(lib_name):
             lib_file = lib_name
 
@@ -61,7 +61,7 @@ def _find_library(name: str, version: int = 0) -> str:
     else:
         # that would be linux/UNIX-like
         # these need to prepend ./
-        lib_name = "./lib%s.so.%d" % (name, version)
+        lib_name = f"./lib{name}.so.{version}"
         if os.path.isfile(lib_name):
             lib_file = lib_name
 
@@ -84,13 +84,13 @@ def _find_library(name: str, version: int = 0) -> str:
         # this won't help anymore,
         # but gives a nice platform dependent file in the error message
         if sys.platform == "win32":
-            lib_file = "%s.dll" % name
+            lib_file = f"{name}.dll"
         elif sys.platform == "darwin":
-            lib_file = "lib%s.%d.dylib" % (name, version)
+            lib_file = f"lib{name}.{version}.dylib"
         elif sys.platform == "cygwin":
-            lib_file = "cyg%s-%d.dll" % (name, version)
+            lib_file = f"cyg{name}-{version}.dll"
         else:
-            lib_file = "lib%s.so.%d" % (name, version)
+            lib_file = f"lib{name}.so.{version}"
 
     return lib_file
 
@@ -102,7 +102,7 @@ def _open_library(lib_name: str) -> CDLL:
     except OSError as exc:
         if lib_name not in str(exc):
             # replace uninformative Error on Windows
-            raise OSError("could not find libdiscid: %s" % lib_name) from exc
+            raise OSError(f"could not find libdiscid: {lib_name}") from exc
         else:
             raise
 

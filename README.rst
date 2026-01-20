@@ -32,7 +32,7 @@ Usage
     import discid
 
     disc = discid.read()  # use default device
-    print("id: %s" % disc.id)
+    print(f"id: {disc.id}")
 
 See also the examples.py.
 
