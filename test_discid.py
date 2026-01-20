@@ -96,6 +96,20 @@ class TestModulePrivate(unittest.TestCase):
             discid.util._encode(discid.util._decode(bytestring)), bytestring
         )
 
+    def test_sectors_to_seconds(self):
+        self.assertEqual(0, discid.util._sectors_to_seconds(0))
+        self.assertEqual(
+            1, discid.util._sectors_to_seconds(discid.util.SECTORS_PER_SECOND)
+        )
+        self.assertEqual(
+            1, discid.util._sectors_to_seconds(discid.util.SECTORS_PER_SECOND / 2)
+        )
+        self.assertEqual(
+            0,
+            discid.util._sectors_to_seconds((discid.util.SECTORS_PER_SECOND / 2) - 0.1),
+        )
+        self.assertIsInstance(discid.util._sectors_to_seconds(90.5), int)
+
 
 class TestModule(unittest.TestCase):
     def test_version_string(self):
