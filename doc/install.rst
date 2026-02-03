@@ -23,7 +23,7 @@ These packages are known:
  * Fedora:
    `python3-discid <https://packages.fedoraproject.org/pkgs/python3-discid/python3-discid/>`_
  * openSUSE:
-   `python-discid <http://software.opensuse.org/package/python-discid>`_
+   `python-discid <https://software.opensuse.org/package/python-discid>`_
  * Ubuntu:
    PPA (
    `musicbrainz-stable <https://launchpad.net/~musicbrainz-developers/+archive/stable>`_
@@ -74,7 +74,7 @@ that takes care of the *Libdiscid* dependency,
 you have to download it manually.
 
 You can find several builds and the source
-at http://musicbrainz.org/doc/libdiscid.
+at https://musicbrainz.org/doc/libdiscid.
 
 If no build for your platform is available,
 you have to build from source and install with::

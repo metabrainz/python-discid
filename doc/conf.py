@@ -60,13 +60,16 @@ else:
 extlinks = {
     "source_download": (download_url, "%s"),
     "issue": ("https://github.com/metabrainz/python-discid/issues/%s", "#%s"),
-    "musicbrainz": ("http://musicbrainz.org/doc/%s", "%s"),
+    "musicbrainz": ("https://musicbrainz.org/doc/%s", "%s"),
 }
 
 # there seems to be no way to prefer latest python documentation
 intersphinx_mapping = {
     "python": ("http://python.readthedocs.org/en/latest/", None),
-    "musicbrainzngs": ("http://python-musicbrainzngs.readthedocs.org/en/latest/", None),
+    "musicbrainzngs": (
+        "https://python-musicbrainzngs.readthedocs.org/en/latest/",
+        None,
+    ),
 }
 
 rst_prolog = """

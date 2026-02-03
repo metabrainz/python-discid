@@ -6,7 +6,7 @@ module supports Python 3 >= 3.10.
 Libdiscid >= 0.2.2 is needed.
 
 Libdiscid's main purpose is the calculation of an identifier of audio
-discs (disc ID) to use for the `MusicBrainz database <http://musicbrainz.org>`_.
+discs (disc ID) to use for the `MusicBrainz database <https://musicbrainz.org>`_.
 
 That identifier is calculated from the TOC of the disc, similar to the
 freeDB CDDB identifier. Libdiscid can calculate MusicBrainz disc IDs and

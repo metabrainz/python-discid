@@ -44,7 +44,7 @@ the total number of sectors for these tracks
 and the offset for every one of the tracks up to the last audio track.
 
 An example for the TOC
-`TqvKjMu7dMliSfmVEBtrL7sBSno- <http://musicbrainz.org/cdtoc/TqvKjMu7dMliSfmVEBtrL7sBSno->`_::
+`TqvKjMu7dMliSfmVEBtrL7sBSno- <https://musicbrainz.org/cdtoc/TqvKjMu7dMliSfmVEBtrL7sBSno->`_::
 
  first = 1
  last = 15

@@ -11,7 +11,7 @@ can be extracted.
 
 This module is released under the
 `GNU Lesser General Public License Version 3
-<http://www.gnu.org/licenses/lgpl.html>`_ or later (LGPL3+) and
+<https://www.gnu.org/licenses/lgpl.html>`_ or later (LGPL3+) and
 the code repository and the bug tracker are at GitHub_.
 
 If you are interested in a binding for the MusicBrainz Web Service,
@@ -48,6 +48,6 @@ Indices and tables
 * :ref:`search`
 
 .. _GitHub: https://github.com/metabrainz/python-discid
-.. _MusicBrainz: http://musicbrainz.org
+.. _MusicBrainz: https://musicbrainz.org
 .. _python-musicbrainzngs: https://python-musicbrainzngs.readthedocs.org/
-.. _python-libdiscid: http://pythonhosted.org/python-libdiscid/
+.. _python-libdiscid: https://pythonhosted.org/python-libdiscid/
