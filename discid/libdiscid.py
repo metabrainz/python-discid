@@ -23,7 +23,7 @@ The code that works with Disc objects is in disc.py
 import ctypes
 import os
 import sys
-from ctypes import c_char_p, c_void_p
+from ctypes import CDLL, c_char_p, c_void_p
 from ctypes.util import find_library
 
 from discid.util import _decode
@@ -32,7 +32,7 @@ _LIB_BASE_NAME = "discid"
 _LIB_MAJOR_VERSION = 0
 
 
-def _find_library(name, version=0):
+def _find_library(name: str, version: int = 0) -> str:
     """Find a library by base-name and major version"""
     windows_names = [
         "%s.dll" % name,
@@ -95,7 +95,7 @@ def _find_library(name, version=0):
     return lib_file
 
 
-def _open_library(lib_name):
+def _open_library(lib_name: str) -> CDLL:
     """Open a library by name or location"""
     try:
         return ctypes.cdll.LoadLibrary(lib_name)
@@ -151,7 +151,7 @@ else:
 
 def _get_features():
     """Get the supported features for the platform."""
-    features = []
+    features: list[str] = []
     if _features_available:
         c_features = (c_char_p * 32)()
         _LIB.discid_get_feature_list(c_features)

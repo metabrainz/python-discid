@@ -173,17 +173,17 @@ class TestModule(unittest.TestCase):
                     track.seconds, math.floor((track.sectors / 75.0) + 0.5)
                 )
                 self.assertEqual(type(track.seconds), int)
-            toc_string = [
+            toc = [
                 test_disc.first,
                 disc.last_track_num,
                 disc.sectors,
             ] + track_offsets
-            toc_string = " ".join(map(str, toc_string))
+            toc_string = " ".join(map(str, toc))
             self.assertEqual(disc.toc_string, toc_string)
-            cddb_query_string = (
+            cddb_query = (
                 [disc.freedb_id, disc.last_track_num] + track_offsets + [disc.seconds]
             )
-            cddb_query_string = " ".join(map(str, cddb_query_string))
+            cddb_query_string = " ".join(map(str, cddb_query))
             self.assertEqual(disc.cddb_query_string, cddb_query_string)
 
 

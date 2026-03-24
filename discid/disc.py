@@ -19,6 +19,7 @@
 
 import re
 from ctypes import c_char_p, c_int, c_uint, c_void_p
+from types import TracebackType
 
 from discid.libdiscid import _LIB, FEATURES
 from discid.track import Track
@@ -106,9 +107,9 @@ class Disc:
         """The initialization will reserve some memory
         for internal data structures.
         """
-        self._handle = c_void_p(_LIB.discid_new())
-        self._success = False
-        self._requested_features = []
+        self._handle: c_void_p | None = c_void_p(_LIB.discid_new())
+        self._success: bool = False
+        self._requested_features: list[str] = []
         assert self._handle.value is not None
 
     def __str__(self):
@@ -323,7 +324,7 @@ class Disc:
             return url
 
     @property
-    def toc_string(self) -> str:
+    def toc_string(self) -> str | None:
         """The TOC suitable as value of the `toc parameter`
         when accessing the MusicBrainz Web Service.
 
@@ -382,7 +383,7 @@ class Disc:
     @property
     def tracks(self) -> list[Track]:
         """A list of :class:`Track` objects for this Disc."""
-        tracks = []
+        tracks: list[Track] = []
         assert self._success
         for number in range(self.first_track_num, self.last_track_num + 1):
             tracks.append(Track(self, number))
@@ -417,7 +418,12 @@ class Disc:
         """deprecated :keyword:`with` usage"""
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> bool | None:
         """deprecated :keyword:`with` usage"""
         pass
 

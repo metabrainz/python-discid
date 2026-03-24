@@ -35,8 +35,8 @@ class Track:
     """
 
     def __init__(self, disc: "Disc", number: int):
-        self._disc = disc
-        self._number = number
+        self._disc: "Disc" = disc
+        self._number: int = number
         assert self._disc._handle and self._disc._handle.value is not None
 
     def __str__(self):
