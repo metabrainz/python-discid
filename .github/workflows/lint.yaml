@@ -19,3 +19,12 @@ jobs:
         uses: astral-sh/ruff-action@v3
         with:
           args: "format --diff"
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install ty
+        run: pip install ty
+      - name: Type check
+        run: ty check --verbose
