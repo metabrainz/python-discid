@@ -2,6 +2,7 @@ name: Linting
 on:
   push:
     paths: &path-list
+    - '.github/workflows/lint.yaml'
     - '**/*.py'
   pull_request:
     paths: *path-list
