@@ -1,6 +1,17 @@
 Changelog
 =========
 
+Changes in 1.4.0 (unreleased):
+------------------------------
+ * Added type hints to the public API for better IDE support and type checking.
+ * Fixed: passing ``device=None`` to :func:`read` and :func:`put` now works correctly.
+ * Fixed: mutable default arguments in function signatures.
+ * Removed Python 2 specific code and comments.
+ * Improved code consistency with ruff formatting and linting.
+ * Minimum supported Python version is now 3.10 (previously 3.9).
+ * Enhanced documentation with type hints using sphinx-autodoc-typehints.
+ * Fixed typos and broken links in documentation.
+
 Changes in 1.3.0 (2025-07-26):
 ------------------------------
  * Modernized, PEP 518 compatible, build system using ``pyproject.toml``.
