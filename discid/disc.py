@@ -183,7 +183,7 @@ class Disc:
         # check for common usage errors
         if len(track_offsets) != last - first + 1:
             raise TOCError("Invalid number of track offsets")
-        elif False in [disc_sectors >= off for off in track_offsets]:
+        elif any(disc_sectors < off for off in track_offsets):
             raise TOCError("Disc sector count too low")
 
         # only the "read" (= TOC) feature is supported by put
