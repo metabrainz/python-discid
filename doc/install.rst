@@ -6,7 +6,7 @@ Dependencies
 **python-discid** works with Python 3 >= 3.10.
 
 The module :mod:`discid` cannot be imported
-without `Libdiscid`_ >= 0.2.2 installed.
+without `libdiscid`_ >= 0.2.2 installed.
 If you want to use it as optional dependency,
 import the module only when needed or catch the :exc:`OSError`
 when libdiscid is not found.
@@ -40,7 +40,7 @@ with `pip <https://pip.pypa.io/>`_::
 
  pip install discid
 
-You still have to install `Libdiscid`_.
+You still have to install `libdiscid`_.
 
 Source Code
 -----------
@@ -61,7 +61,7 @@ System-wide installation is done with::
 
  python setup.py install
 
-You can test your setup (including `Libdiscid`_) with::
+You can test your setup (including `libdiscid`_) with::
 
  python setup.py test
 
@@ -70,7 +70,7 @@ You can test your setup (including `Libdiscid`_) with::
 Libdiscid
 ---------
 If you don't have a package manager
-that takes care of the *Libdiscid* dependency,
+that takes care of the *libdiscid* dependency,
 you have to download it manually.
 
 You can find several builds and the source

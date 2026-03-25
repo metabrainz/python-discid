@@ -29,8 +29,8 @@ Contents
 
 Related Tools
 -------------
-There are other other bindings of libdiscid available.
-Please check :musicbrainz:`Libdiscid`.
+There are other bindings of libdiscid available.
+Please check :musicbrainz:`libdiscid`.
 
 In particular there is another Python binding named `python-libdiscid`_.
 The main difference is, that `python-libdiscid` is released
