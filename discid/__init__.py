@@ -18,7 +18,7 @@
 """Python binding of Libdiscid
 
 Libdiscid is a library to calculate MusicBrainz Disc IDs.
-This module provides a python-like API for that functionality.
+This module provides a Python-like API for that functionality.
 
 The user is expected to create a :class:`Disc` object
 using :func:`read` or :func:`put` and extract the generated information.
@@ -52,19 +52,19 @@ __all__ = [
 # these constants are defined here so sphinx can catch the "docstrings"
 
 LIBDISCID_VERSION_STRING = discid.libdiscid.LIBDISCID_VERSION_STRING
-"""The version string of the loaded libdiscid in the form `libdiscid x.y.z`.
-For old versions the string is `libdiscid < 0.4.0`.
+"""The version string of the loaded libdiscid in the form ``"libdiscid x.y.z"``.
+For versions older than 0.4.0 the string is ``"libdiscid < 0.4.0"``.
 """
 
 FEATURES = discid.libdiscid.FEATURES
 """The features libdiscid supports for the platform as a list of strings.
-Some Functions can raise :exc:`NotImplementedError` when a feature
+Some functions can raise :exc:`NotImplementedError` when a feature
 is not available.
-Some features might not be implemented in this python module,
+Some features might not be implemented in this Python module,
 see :data:`FEATURES_IMPLEMENTED`.
 """
 
 FEATURES_IMPLEMENTED = discid.disc.FEATURES_IMPLEMENTED
-"""The features implemented in this python module as a list of strings.
+"""The features implemented in this Python module as a list of strings.
 Some might not be available for your platform, see :data:`FEATURES`.
 """

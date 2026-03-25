@@ -237,7 +237,7 @@ class Disc:
         pass
 
     def _get_toc_string(self):
-        """The TOC suitable as value of the `toc parameter`
+        """The TOC suitable as value of the ``toc`` parameter
         when accessing the MusicBrainz Web Service.
         """
         assert self._success
@@ -307,9 +307,9 @@ class Disc:
 
     @property
     def submission_url(self) -> str | None:
-        """Disc ID / TOC Submission URL for MusicBrainz
+        """Disc ID / TOC submission URL for MusicBrainz
 
-        With this url you can submit the current TOC
+        With this URL you can submit the current TOC
         as a new MusicBrainz :musicbrainz:`Disc ID`.
         This is a :obj:`str <python:str>` object.
         """
@@ -324,7 +324,7 @@ class Disc:
 
     @property
     def toc_string(self) -> str | None:
-        """The TOC suitable as value of the `toc parameter`
+        """The TOC suitable as value of the ``toc`` parameter
         when accessing the MusicBrainz Web Service.
 
         This is a :obj:`str <python:str>` object
@@ -373,7 +373,7 @@ class Disc:
     def mcn(self) -> str | None:
         """This is the Media Catalogue Number (MCN/UPC/EAN)
 
-        It is set after the `"mcn"` feature was requested on a read
+        It is set after the ``"mcn"`` feature was requested on a read
         and supported by the platform or :obj:`None`.
         If set, this is a :obj:`str <python:str>` object.
         """
