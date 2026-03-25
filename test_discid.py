@@ -5,6 +5,7 @@
 import math
 import os
 import unittest
+from collections.abc import Sequence
 from dataclasses import dataclass
 
 import discid
@@ -17,7 +18,7 @@ class DiscTestData:
     first: int
     last: int
     sectors: int
-    offsets: list[int]
+    offsets: Sequence[int]
     id: str
     freedb: str
 
@@ -53,7 +54,7 @@ test_discs = [
         first=2,
         last=11,
         sectors=225781,
-        offsets=[
+        offsets=(
             150,
             11512,
             34143,
@@ -64,9 +65,18 @@ test_discs = [
             174410,
             195438,
             201127,
-        ],
+        ),
         id="6RDuz0d7.M5SVMLe1z4DP0yaEC8-",
         freedb="840bc20b",
+    ),
+    DiscTestData(
+        name="Minimal",
+        first=1,
+        last=1,
+        sectors=44942,
+        offsets=[150],
+        id="ANJa4DGYN_ktpzOwvVPtcjwP7mE-",
+        freedb="02025501",
     ),
 ]
 
@@ -162,7 +172,7 @@ class TestModule(unittest.TestCase):
             self.assertEqual(disc.last_track_num, test_disc.last)
             self.assertEqual(disc.sectors, test_disc.sectors)
             track_offsets = [track.offset for track in disc.tracks]
-            self.assertEqual(track_offsets, test_disc.offsets)
+            self.assertEqual(track_offsets, list(test_disc.offsets))
             self.assertEqual(
                 disc.sectors, disc.tracks[-1].offset + disc.tracks[-1].sectors
             )

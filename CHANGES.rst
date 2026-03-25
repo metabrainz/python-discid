@@ -6,6 +6,7 @@ Changes in 1.4.0 (unreleased):
  * Added type hints to the public API for better IDE support and type checking.
  * Fixed: passing ``device=None`` to :func:`read` and :func:`put` now works correctly.
  * Fixed: mutable default arguments in function signatures.
+ * Accept any ``Sequence[int]`` for ``offsets`` in :func:`put`.
  * Removed Python 2 specific code and comments.
  * Improved code consistency with ruff formatting and linting.
  * Minimum supported Python version is now 3.10 (previously 3.9).

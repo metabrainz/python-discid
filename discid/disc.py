@@ -18,7 +18,7 @@
 """Disc class"""
 
 import re
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from ctypes import c_char_p, c_int, c_uint, c_void_p
 from types import TracebackType
 
@@ -61,7 +61,9 @@ def read(
     return disc
 
 
-def put(first: int, last: int, disc_sectors: int, track_offsets: list[int]) -> "Disc":
+def put(
+    first: int, last: int, disc_sectors: int, track_offsets: Sequence[int]
+) -> "Disc":
     """Creates a TOC based on the information given
     and returns a :class:`Disc` object.
 
@@ -172,7 +174,7 @@ class Disc:
     _LIB.discid_put.restype = c_int
 
     def put(
-        self, first: int, last: int, disc_sectors: int, track_offsets: list[int]
+        self, first: int, last: int, disc_sectors: int, track_offsets: Sequence[int]
     ) -> bool:
         """Creates a TOC based on the input given.
 
@@ -187,7 +189,7 @@ class Disc:
         # only the "read" (= TOC) feature is supported by put
         self._requested_features = ["read"]
 
-        offsets = [disc_sectors] + track_offsets
+        offsets = [disc_sectors] + list(track_offsets)
         # libdiscid always expects an array of 100 integers, no matter the track count.
         c_offsets = (c_int * 100)()
         c_offsets[0] = offsets[0]
