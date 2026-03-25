@@ -18,6 +18,7 @@
 """Disc class"""
 
 import re
+from collections.abc import Iterable
 from ctypes import c_char_p, c_int, c_uint, c_void_p
 from types import TracebackType
 
@@ -33,7 +34,7 @@ FEATURES_IMPLEMENTED = list(_FEATURE_MAPPING.keys())
 
 
 def read(
-    device: str | bytes | None = None, features: list[str] | None = None
+    device: str | bytes | None = None, features: Iterable[str] | None = None
 ) -> "Disc":
     """Reads the TOC from the device given as string
     and returns a :class:`Disc` object.
@@ -132,7 +133,7 @@ class Disc:
         pass
 
     def read(
-        self, device: str | bytes | None = None, features: list[str] | None = None
+        self, device: str | bytes | None = None, features: Iterable[str] | None = None
     ) -> bool:
         """Reads the TOC from the device given as string
 
