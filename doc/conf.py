@@ -99,6 +99,10 @@ html_theme_options = {
 html_title = "%s %s documentation" % (project, current)
 html_domain_indices = False
 
+# Add custom CSS for better property display
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
+
 # -- Options for LaTeX output --------------------------------------------------
 
 latex_elements: dict[str, str] = {

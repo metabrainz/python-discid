@@ -30,36 +30,36 @@ Disc object
 .. autoclass:: Disc
    :undoc-members:
 
-   .. autoattribute:: id
-   .. autoattribute:: freedb_id
-   .. autoattribute:: submission_url
-   .. autoattribute:: toc_string
+   .. autoproperty:: id
+   .. autoproperty:: freedb_id
+   .. autoproperty:: submission_url
+   .. autoproperty:: toc_string
 
       .. versionadded:: 1.1
 
-   .. autoattribute:: cddb_query_string
+   .. autoproperty:: cddb_query_string
 
       .. versionadded:: 1.3
 
-   .. autoattribute:: first_track_num
-   .. autoattribute:: last_track_num
-   .. autoattribute:: sectors
-   .. autoattribute:: length
-   .. autoattribute:: seconds
-   .. autoattribute:: mcn
-   .. autoattribute:: tracks
+   .. autoproperty:: first_track_num
+   .. autoproperty:: last_track_num
+   .. autoproperty:: sectors
+   .. autoproperty:: length
+   .. autoproperty:: seconds
+   .. autoproperty:: mcn
+   .. autoproperty:: tracks
 
 Track object
 ------------
 .. autoclass:: Track
    :undoc-members:
 
-   .. autoattribute:: number
-   .. autoattribute:: offset
-   .. autoattribute:: sectors
-   .. autoattribute:: length
-   .. autoattribute:: seconds
-   .. autoattribute:: isrc
+   .. autoproperty:: number
+   .. autoproperty:: offset
+   .. autoproperty:: sectors
+   .. autoproperty:: length
+   .. autoproperty:: seconds
+   .. autoproperty:: isrc
 
 Exceptions
 ----------
