@@ -48,12 +48,12 @@ def read(
     In contrast to libdiscid, :func:`read` won't read any
     of the additional features by default.
 
-    A :exc:`DiscError` exception is raised when the reading fails,
-    and :exc:`NotImplementedError` when libdiscid doesn't support
-    reading discs on the current platform.
-
     :param device: the device name to use or :obj:`None` for using the default device
     :param features: list of features to enable ("read" will always be assumed)
+
+    :raises DiscError: raised when reading the device fails
+    :raises NotImplementedError: raised when libdiscid does not support reading discs
+                                 on the current platform
     """
     disc = Disc()
     disc.read(device, features)
@@ -67,14 +67,13 @@ def put(first: int, last: int, disc_sectors: int, track_offsets: list[int]) -> "
     Depending on how you get the total sector count,
     you might have to subtract 11400 (2:32 min.) for discs with data tracks.
 
-    A :exc:`TOCError` exception is raised when illegal parameters
-    are provided.
-
     :param first: number of the first audio track
     :param last: number of the last audio track
     :param disc_sectors: the end of the last audio track, normally the total
                          sector count of the disc
     :param track_offsets: list of all audio track offsets
+
+    :raises TOCError: raised when illegal parameters are provided
 
     .. seealso:: :musicbrainz:`Disc ID Calculation`
     """
