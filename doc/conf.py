@@ -42,7 +42,7 @@ exclude_patterns = ["_build", ".venv"]
 
 # General information about the project.
 project = "python-discid"
-copyright = "2013, Johannes Dewender"
+copyright = "2013 Johannes Dewender, 2026 Philipp Wolfer"
 # The short X.Y version / base version
 version = ".".join(discid.__version__.split("-")[0].split(".")[0:2])
 # The full version, including alpha/beta/rc tags.

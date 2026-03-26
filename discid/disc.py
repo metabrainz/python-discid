@@ -1,4 +1,6 @@
 # Copyright (C) 2013  Johannes Dewender
+# Copyright (C) 2017  Frederik “Freso” S. Olesen
+# Copyright (C) 2025, 2026  Philipp Wolfer
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by

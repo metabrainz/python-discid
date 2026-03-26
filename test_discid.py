@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # Copyright (C) 2013  Johannes Dewender
+# Copyright (C) 2017  Frederik “Freso” S. Olesen
+# Copyright (C) 2025, 2026  Philipp Wolfer
 # This test is free. You can redistribute and/or modify it at will.
 
 import math
