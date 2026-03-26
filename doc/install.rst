@@ -25,10 +25,8 @@ These packages are known:
  * openSUSE:
    `python-discid <https://software.opensuse.org/package/python-discid>`_
  * Ubuntu:
-   PPA (
-   `musicbrainz-stable <https://launchpad.net/~musicbrainz-developers/+archive/stable>`_
-   and `musicbrainz-daily <https://launchpad.net/~musicbrainz-developers/+archive/daily>`_
-   )
+   PPA (`musicbrainz-stable <https://launchpad.net/~musicbrainz-developers/+archive/stable>`_
+   and `musicbrainz-daily <https://launchpad.net/~musicbrainz-developers/+archive/daily>`_)
 
 Your package manager will also handle the *libdiscid* dependency automatically.
 
