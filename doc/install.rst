@@ -57,15 +57,26 @@ You can use **python-discid** already when you put the folder :file:`discid`
 in the same location you run your script from
 or somewhere in your :envvar:`PYTHONPATH`.
 
-System-wide installation is done with::
+System-wide installation from local source can be done with pip::
 
- python setup.py install
+ python -m pip install .
 
-You can test your setup (including `libdiscid`_) with::
+Running tests
+*************
 
- python setup.py test
+You can test your setup (including `libdiscid`_) with `pytest`_::
+
+ pytest
+
+Some additional tests can be run that require the presence of a CD drive with an
+inserted audio CD. The exact audio CD does not matter, any valid audio CD should work.
+To run those tests set the environment variable ``PYTHON_DISCID_TEST_DEVICE`` to a
+non-empty value and run pytest::
+
+ PYTHON_DISCID_TEST_DEVICE=1 pytest
 
 .. _GitHub: https://github.com/metabrainz/python-discid
+.. _pytest: https://pytest.org/
 
 Libdiscid
 ---------

@@ -17,7 +17,7 @@ Changes in 1.3.0 (2025-07-26):
  * Modernized, PEP 518 compatible, build system using ``pyproject.toml``.
  * Minimum supported Python version is now 3.9.
  * :issue:`51` tests requiring a physical disc are not run by default anymore.
-   Set the environment variable ``DISCID_TESTS_REQUIRE_DISC`` to enable them
+   Set the environment variable ``PYTHON_DISCID_TEST_DEVICE`` to enable them
    or run ``make disccheck``.
  * Fixed :func:`put` to work with first track number greater than 1.
  * Add :attr:`Disc.cddb_query_string` property.
