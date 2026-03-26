@@ -12,7 +12,7 @@ class Mock:
     def __call__(self, *args):
         return Mock()
 
-    def __getattr__(cls, name):
+    def __getattr__(self, name):
         return Mock()
 
     def discid_get_version_string(self):
