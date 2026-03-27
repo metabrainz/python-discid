@@ -36,6 +36,17 @@ Disc object
 
    .. autoproperty:: id
    .. autoproperty:: freedb_id
+   .. autoproperty:: first_track_num
+   .. autoproperty:: last_track_num
+   .. autoproperty:: pregap
+
+      .. versionadded:: 1.4
+
+   .. autoproperty:: sectors
+   .. autoproperty:: length
+   .. autoproperty:: seconds
+   .. autoproperty:: mcn
+   .. autoproperty:: tracks
    .. autoproperty:: submission_url
    .. autoproperty:: toc_string
 
@@ -44,14 +55,6 @@ Disc object
    .. autoproperty:: cddb_query_string
 
       .. versionadded:: 1.3
-
-   .. autoproperty:: first_track_num
-   .. autoproperty:: last_track_num
-   .. autoproperty:: sectors
-   .. autoproperty:: length
-   .. autoproperty:: seconds
-   .. autoproperty:: mcn
-   .. autoproperty:: tracks
 
 Track object
 ------------

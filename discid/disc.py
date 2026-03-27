@@ -362,6 +362,17 @@ class Disc:
         return self._get_last_track_num()
 
     @property
+    def pregap(self) -> int:
+        """Pregap of the first track in sectors.
+
+        This corresponds to the offset of the first track. A pregap of 150
+        sectors is typical for a CD and does not indicate any intentional gap
+        before the first track.
+        """
+        track = Track(self, self._get_first_track_num())
+        return track.offset
+
+    @property
     def sectors(self) -> int:
         """Total length in sectors"""
         return self._get_sectors()

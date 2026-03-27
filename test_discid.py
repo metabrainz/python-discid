@@ -80,6 +80,30 @@ test_discs = [
         id="ANJa4DGYN_ktpzOwvVPtcjwP7mE-",
         freedb="02025501",
     ),
+    DiscTestData(
+        name="Korn - See You on the Other Side, with pre-gap audio track",
+        first=1,
+        last=14,
+        sectors=275749,
+        offsets=[
+            5475,
+            19645,
+            34416,
+            51655,
+            68900,
+            90015,
+            111090,
+            130510,
+            158652,
+            173635,
+            189015,
+            208122,
+            224413,
+            252866,
+        ],
+        id="CnkXRItZOUxex7JwyWmHfdbFdqE-",
+        freedb="be0e130e",
+    ),
 ]
 
 
@@ -172,6 +196,7 @@ class TestModule(unittest.TestCase):
             self.assertEqual(disc.freedb_id, test_disc.freedb)
             self.assertEqual(disc.first_track_num, test_disc.first)
             self.assertEqual(disc.last_track_num, test_disc.last)
+            self.assertEqual(disc.pregap, test_disc.offsets[0])
             self.assertEqual(disc.sectors, test_disc.sectors)
             track_offsets = [track.offset for track in disc.tracks]
             self.assertEqual(track_offsets, list(test_disc.offsets))
@@ -226,6 +251,7 @@ class TestDisc(unittest.TestCase):
             disc.last_track_num, len(disc.tracks), "Wrong amount of tracks"
         )
         self.assertEqual(disc.sectors, disc.tracks[-1].offset + disc.tracks[-1].sectors)
+        self.assertEqual(disc.pregap, disc.tracks[0].offset)
 
         for track in disc.tracks:
             self.assertTrue(track.offset <= disc.sectors, "Invalid offset")
