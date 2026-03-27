@@ -12,6 +12,10 @@ At the module level there are these constants available:
    :annotation:
 .. autodata:: FEATURES
    :annotation:
+
+   See the :musicbrainz:`libdiscid feature matrix <libdiscid#Feature_Matrix>`
+   for a list of supported features per platform.
+
 .. autodata:: FEATURES_IMPLEMENTED
 
 Functions
