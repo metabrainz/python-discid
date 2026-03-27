@@ -50,4 +50,4 @@ Indices and tables
 .. _GitHub: https://github.com/metabrainz/python-discid
 .. _MusicBrainz: https://musicbrainz.org
 .. _python-musicbrainzngs: https://python-musicbrainzngs.readthedocs.org/
-.. _python-libdiscid: https://pythonhosted.org/python-libdiscid/
+.. _python-libdiscid: https://python-libdiscid.readthedocs.io/
