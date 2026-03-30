@@ -52,7 +52,7 @@ release = discid.__version__
 download_base = "https://github.com/metabrainz/python-discid/archive"
 if release.endswith("dev"):
     current = f"{version}-dev"
-    download_url = f"{download_base}/master.%s"
+    download_url = f"{download_base}/main.%s"
 else:
     current = version
     download_url = f"{download_base}/v{release}.%s"
