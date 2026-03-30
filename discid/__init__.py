@@ -33,7 +33,7 @@ from discid.disc import Disc, DiscError, TOCError, put, read
 from discid.libdiscid import get_default_device
 from discid.track import Track
 
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 
 __all__ = [
     "LIBDISCID_VERSION_STRING",

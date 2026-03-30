@@ -1,4 +1,4 @@
-version := 1.2.0
+version := 1.4.0
 
 build:
 	python -m build .

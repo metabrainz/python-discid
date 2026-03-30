@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Changes in 1.4.0 (unreleased):
+Changes in 1.4.0 (2026-03-30):
 ------------------------------
  * Added type hints to the public API for better IDE support and type checking.
  * Added :attr:`Disc.pregap` property.
