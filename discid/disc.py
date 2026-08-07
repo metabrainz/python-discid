@@ -413,7 +413,7 @@ class Disc:
 
         .. seealso:: `CDDB Server Protocol <https://gnudb.org/howtognudb.php>`_
         """
-        offset_str = " ".join([str(track.offset) for track in self.tracks])
+        offset_str = " ".join(str(track.offset) for track in self.tracks)
         cddb_query_string = (
             f"{self.freedb_id} {self.last_track_num} {offset_str} {self.seconds}"
         )
