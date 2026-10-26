@@ -65,9 +65,9 @@ extlinks = {
 
 # there seems to be no way to prefer latest python documentation
 intersphinx_mapping = {
-    "python": ("http://python.readthedocs.org/en/latest/", None),
+    "python": ("https://docs.python.org/3/", None),
     "musicbrainzngs": (
-        "https://python-musicbrainzngs.readthedocs.org/en/latest/",
+        "https://python-musicbrainzngs.readthedocs.io/en/latest/",
         None,
     ),
 }
