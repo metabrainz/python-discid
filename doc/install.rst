@@ -19,22 +19,22 @@ you might find **python-discid** in a repository used by your package manager.
 These packages are known:
 
  * Arch Linux:
-   `python-discid <https://archlinux.org/packages/extra/any/python-discid/>`_
+   `python-discid <https://archlinux.org/packages/extra/any/python-discid/>`__
  * Fedora:
-   `python3-discid <https://packages.fedoraproject.org/pkgs/python3-discid/python3-discid/>`_
+   `python3-discid <https://packages.fedoraproject.org/pkgs/python3-discid/python3-discid/>`__
  * openSUSE:
-   `python-discid <https://software.opensuse.org/package/python-discid>`_
+   `python-discid <https://software.opensuse.org/package/python-discid>`__
  * Ubuntu:
-   PPA (`musicbrainz-stable <https://launchpad.net/~musicbrainz-developers/+archive/stable>`_
-   and `musicbrainz-daily <https://launchpad.net/~musicbrainz-developers/+archive/daily>`_)
+   PPA (`musicbrainz-stable <https://launchpad.net/~musicbrainz-developers/+archive/stable>`__
+   and `musicbrainz-daily <https://launchpad.net/~musicbrainz-developers/+archive/daily>`__)
 
 Your package manager will also handle the *libdiscid* dependency automatically.
 
 PyPI
 ----
 The next-best option is to load the Package from
-`pypi <https://pypi.org/project/discid/>`_
-with `pip <https://pip.pypa.io/>`_::
+`pypi <https://pypi.org/project/discid/>`__
+with `pip <https://pip.pypa.io/>`__::
 
  pip install discid
 

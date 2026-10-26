@@ -11,7 +11,7 @@ can be extracted.
 
 This module is released under the
 `GNU Lesser General Public License Version 3
-<https://www.gnu.org/licenses/lgpl.html>`_ or later (LGPL3+) and
+<https://www.gnu.org/licenses/lgpl.html>`__ or later (LGPL3+) and
 the code repository and the bug tracker are at GitHub_.
 
 If you are interested in a binding for the MusicBrainz Web Service,
