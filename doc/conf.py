@@ -26,7 +26,7 @@ import discid  # noqa: E402
 
 # -- General configuration -----------------------------------------------------
 
-needs_sphinx = "1.0"
+needs_sphinx = "8.1"
 
 extensions = [
     "sphinx.ext.autodoc",
@@ -36,7 +36,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_autodoc_typehints",
 ]
-source_suffix = ".rst"
+source_suffix = {".rst": "restructuredtext"}
 master_doc = "index"
 exclude_patterns = ["_build", ".venv"]
 
