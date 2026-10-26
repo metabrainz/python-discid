@@ -92,9 +92,11 @@ you have to build from source and install with::
  make
  make install
 
-If the last step doesn't work for you,
-you might have to place the files :file:`discid.DLL`, :file:`libdiscid.*.dylib`
-or :file:`libdiscid.so.*`
-(depending on your platform)
-in the same directory as you start your script from
-or somewhere in your :envvar:`PATH`.
+If the last step doesn't work for you, you might have to place the files
+:file:`discid.dll`, :file:`libdiscid.*.dylib` or :file:`libdiscid.so.*`
+(depending on your platform) in the same directory as you start your script
+from or somewhere in your :envvar:`PATH`.
+
+.. note::
+   When using the macOS or Windows binary builds from the download page make
+   sure to use the correct files for your processor architecture.
