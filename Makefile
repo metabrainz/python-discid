@@ -23,6 +23,6 @@ version:
 
 clean:
 	rm -f *.pyc discid/*.pyc
-	rm -rf __pycache__ discid/__pycache__
+	rm -rf __pycache__ discid/__pycache__ doc/_build
 
 .PHONY: doc build
